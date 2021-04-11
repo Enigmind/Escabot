@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM arm32v6/node:14-alpine
 
 WORKDIR /usr/src/bot
 
@@ -7,4 +7,4 @@ RUN npm ci
 
 COPY . /usr/src/bot/
 
-CMD ["node", "anick.js"]
+CMD ["node", "esca.js"]
