@@ -1,0 +1,26 @@
+{
+  "name": "bot-vk",
+  "version": "1.7.0",
+  "description": "discord bot for veritas kingdom",
+  "main": "vk_bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Enigmind/Bot-VK.git"
+  },
+  "author": "Enigmind",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Enigmind/Bot-VK/issues"
+  },
+  "homepage": "https://github.com/Enigmind/Bot-VK#readme",
+  "dependencies": {
+    "dateformat": "^3.0.3",
+    "discord-welcome": "^2.0.2",
+    "discord.js": "^12.3.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {}
+}
