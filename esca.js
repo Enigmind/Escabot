@@ -43,7 +43,7 @@ client.on('ready', () => {
 
 client.on('message', (message) => {
   // Prevent bot from responding to its own messages
-  if (message.content.includes("bite")){
+  if (message.content.toLowerCase().includes("bite")){
     message.react('🍆')
       .then(() => message.react('💦'))
       .then(() => message.react('🔞'))
