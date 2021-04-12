@@ -1,4 +1,4 @@
-# Bot Anick
+# Esca Bot
 ## Description :
 Useless bot for AMONG SUS
 
