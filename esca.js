@@ -43,7 +43,12 @@ client.on('ready', () => {
 
 client.on('message', (message) => {
   // Prevent bot from responding to its own messages
-  if (message.content.toLowerCase().includes("bite")){
+
+  if (message.content.toLowerCase().includes("petite bite")){
+    message.react('🥒')
+      .then(() => message.react('🤏'))
+      .catch(() => console.error('One of the emojis failed to react.'));
+  } else if (message.content.toLowerCase().includes("bite")){
     message.react('🍆')
       .then(() => message.react('💦'))
       .then(() => message.react('🔞'))
