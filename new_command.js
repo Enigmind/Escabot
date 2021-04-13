@@ -1,5 +1,5 @@
 const apiEndpoint = 'https://discord.com/api/v8/applications/589466442961911840/guilds/539794635283890186/commands'
-const botToken = 'NTg5NDY2NDQyOTYxOTExODQw.XQUFZw.gq9GrVkpykl9C_A_xRILD_hWzuI'
+const botToken = '<bot-token-here>'
 const commandData = {
     "name": "test",
     "description": "test command",
