@@ -1,0 +1,36 @@
+{
+    "name": "test",
+    "description": "test command",
+    "options": [
+        {
+            "name": "string",
+            "description": "string to test",
+            "type": 3,
+            "required": false,
+            "choices": [
+                {
+                    "name": "Magellanic",
+                    "value": "magellanic"
+                },
+                {
+                    "name": "Emperor",
+                    "value": "emperor"
+                },
+                {
+                    "name": "Chinstrap",
+                    "value": "chinstrap"
+                },
+                {
+                    "name": "Gentoo",
+                    "value": "gentoo"
+                }
+            ]
+        },
+        {
+            "name": "role",
+            "description": "role to test",
+            "type": 8,
+            "required": false
+        }
+    ]
+  }

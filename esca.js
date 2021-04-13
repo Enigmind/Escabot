@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const fs = require('fs')
 const Welcome = require("discord-welcome");
-const {prefix, token} = require('./config.json');
+const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client()
 client.commands = new Discord.Collection();
@@ -27,7 +27,7 @@ Welcome(client, {
 })
 
 // When someone left the server
-client.on('guildMemberRemove',(member) => {
+client.on('guildMemberRemove', (member) => {
   client.channels.cache.get('772194344929067023').send(`**${member.user.username}** was the impostor ! bye bye !`);
 })
 
@@ -39,16 +39,34 @@ client.on('ready', () => {
     type: "WATCHING"
   })
   // client.channels.cache.get(`743410236689350676`).send("test message")
+
+  client.ws.on('INTERACTION_CREATE', async interaction => {
+    const command = interaction.data.name.toLowerCase();
+    const args = interaction.data.options;
+
+    if (command === 'test') {
+      // here you could do anything. in this sample
+      // i reply with an api interaction
+      client.api.interactions(interaction.id, interaction.token).callback.post({
+        data: {
+          type: 4,
+          data: {
+            content: "hello world!!!"
+          }
+        }
+      })
+    }
+  });
 })
 
 client.on('message', (message) => {
   // Prevent bot from responding to its own messages
 
-  if (message.content.toLowerCase().includes("petite bite")){
+  if (message.content.toLowerCase().includes("petite bite")) {
     message.react('🥒')
       .then(() => message.react('🤏'))
       .catch(() => console.error('One of the emojis failed to react.'));
-  } else if (message.content.toLowerCase().includes("bite")){
+  } else if (message.content.toLowerCase().includes("bite")) {
     message.react('🍆')
       .then(() => message.react('💦'))
       .then(() => message.react('🔞'))
@@ -58,14 +76,14 @@ client.on('message', (message) => {
   if (message.author == client.user || !message.content.startsWith(prefix)) {
     return
   }
-  
+
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
   const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-  
+
   if (!command) return;
-  
+
   console.log("Command received: " + commandName)
   console.log("Arguments: " + args) // There may not be any arguments
 
