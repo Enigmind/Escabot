@@ -17,18 +17,14 @@ for (const file of commandFiles) {
 //when someone slide into the server
 Welcome(client, {
   "772194344929067019": {
-    publicmsg: "Salut @MEMBER, j'espère que tu suces.",
+    publicmsg: "Bienvenue à toi @MEMBER, Viens donc jouer avec nous !",
     publicchannel: "772194344929067023"
   },
-  "539794635283890186": {
-    publicmsg: "Bienvenue sur mon serveur de test :kissing_heart:",
-    publicchannel: "743393331677233172"
-  }
 })
 
 // When someone left the server
 client.on('guildMemberRemove', (member) => {
-  client.channels.cache.get('772194344929067023').send(`**${member.user.username}** was the impostor ! bye bye !`);
+  client.channels.cache.get('772194344929067023').send(`**${member.user.username}** was ejected ! He was an Impostor ! \n<:fine:785276116558151690>`);
 })
 
 // when the bot is connected
@@ -51,7 +47,7 @@ client.on('ready', () => {
         data: {
           type: 4,
           data: {
-            content: "hello world!!!"
+            content: "un jour, je saurai répondre aux `/commands`..."
           }
         }
       })
@@ -60,8 +56,14 @@ client.on('ready', () => {
 })
 
 client.on('message', (message) => {
-  // Prevent bot from responding to its own messages
+  //emotes custom
+  const tag_de_ses_morts = client.emojis.resolveIdentifier('831548507990261850');
+  const impo = client.emojis.resolveIdentifier('831235278822965290');
 
+  // prevent the bot to respond to itself
+  if (message.author == client.user) return;
+
+  // react when somone says "bite" or "petite bite"
   if (message.content.toLowerCase().includes("petite bite")) {
     message.react('🥒')
       .then(() => message.react('🤏'))
@@ -73,10 +75,39 @@ client.on('message', (message) => {
       .catch(() => console.error('One of the emojis failed to react.'));
   }
 
-  if (message.author == client.user || !message.content.startsWith(prefix)) {
+  // react with the deserved emoji for all bastards that @everyone (like tibo)
+  if (message.content.includes("@everyone")){
+    message.react(tag_de_ses_morts)
+    message.react('🤬')
+    message.react('💢')
+    message.react(impo)
+  }
+  else if (message.mentions.has(client.user.id)) {
+    message.react('🤔')
+    rnd = Math.floor(Math.random() * Math.floor(4));
+    switch (rnd) {
+      case 0:
+        message.reply("J'espère que tu as une bonne raison de me tag comme ça !")
+        break;
+      case 1:
+        message.reply("Plaît-il ?")
+        break;
+      case 2:
+        message.reply("Tu sais que je ne suis censé répondre qu'aux commandes ? je t'invite à faire un petit `?aled` pour mieux saisir comment je fonctionne.")
+        break;
+      case 3:
+        message.reply("J'entends pas les rageux désolé.")
+        break;
+      default:
+        console.log('oups ! out of range :)');
+    }
+  }
+
+  if (!message.content.startsWith(prefix)) {
     return
   }
 
+  
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
