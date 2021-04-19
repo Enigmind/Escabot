@@ -34,7 +34,10 @@ client.on('ready', () => {
   client.user.setActivity("Pornhub", {
     type: "WATCHING"
   })
-  // client.channels.cache.get(`743410236689350676`).send("test message")
+  // client.channels.cache.get(`787364293095456788`).send("")
+  // general = client.channels.cache.get('772194344929067023')
+  // among = client.channels.cache.get('787364293095456788')
+  // among.fetch('831979167041060894').react('❤️')
 
   client.ws.on('INTERACTION_CREATE', async interaction => {
     const command = interaction.data.name.toLowerCase();
@@ -63,6 +66,11 @@ client.on('message', (message) => {
   // prevent the bot to respond to itself
   if (message.author == client.user) return;
 
+  // delete les messages du puni
+  if (message.member.roles.cache.find(r => r.id === "831986434373844994")){
+    message.delete()
+  }
+
   // react when somone says "bite" or "petite bite"
   if (message.content.toLowerCase().includes("petite bite")) {
     message.react('🥒')
@@ -81,6 +89,9 @@ client.on('message', (message) => {
     message.react('🤬')
     message.react('💢')
     message.react(impo)
+  }
+  else if (message.content.includes("@here")){
+    message.react('🐒')
   }
   else if (message.mentions.has(client.user.id)) {
     message.react('🤔')
