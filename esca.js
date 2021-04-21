@@ -93,6 +93,9 @@ client.on('message', (message) => {
   else if (message.content.includes("@here")){
     message.react('🐒')
   }
+  else if (message.mentions.has(client.user.id) && message.member.id === "240478618206076938") {
+    message.reply("Que puis-je faire pour vous maître ?")
+  }
   else if (message.mentions.has(client.user.id)) {
     message.react('🤔')
     rnd = Math.floor(Math.random() * Math.floor(4));
