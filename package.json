@@ -21,6 +21,7 @@
     "discord-welcome": "^2.0.2",
     "discord.js": "^12.3.1",
     "node-fetch": "^2.6.1",
+    "openai-api": "^1.2.1",
     "request": "^2.88.0"
   }
 }

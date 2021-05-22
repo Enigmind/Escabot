@@ -6,6 +6,8 @@ const { prefix, token } = require('./config.json');
 const client = new Discord.Client()
 client.commands = new Discord.Collection();
 
+global.client = client
+
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
@@ -40,22 +42,23 @@ client.on('ready', () => {
   // among.fetch('831979167041060894').react('❤️')
 
   client.ws.on('INTERACTION_CREATE', async interaction => {
-    const command = interaction.data.name.toLowerCase();
-    const args = interaction.data.options;
-
-    if (command === 'test') {
-      // here you could do anything. in this sample
-      // i reply with an api interaction
+    if (!client.commands.has(interaction.data.name)) return;
+    try {
+      client.commands.get(interaction.data.name).execute(interaction);
+      // console.log(interaction.data.options[0].value)
+    } catch (error) {
+      console.log(`Error from command ${interaction.data.name} : ${error.message}`);
+      console.log(`${error.stack}\n`)
       client.api.interactions(interaction.id, interaction.token).callback.post({
         data: {
           type: 4,
           data: {
-            content: "un jour, je saurai répondre aux `/commands`..."
+            content: `Oups, une erreur s'est produite !`
           }
         }
       })
     }
-  });
+  })
 })
 
 client.on('message', (message) => {
@@ -67,7 +70,7 @@ client.on('message', (message) => {
   if (message.author == client.user) return;
 
   // delete les messages du puni
-  if (message.member.roles.cache.find(r => r.id === "831986434373844994")){
+  if (message.member.roles.cache.find(r => r.id === "831986434373844994")) {
     message.delete()
   }
 
@@ -84,13 +87,13 @@ client.on('message', (message) => {
   }
 
   // react with the deserved emoji for all bastards that @everyone (like tibo)
-  if (message.content.includes("@everyone")){
+  if (message.content.includes("@everyone")) {
     message.react(tag_de_ses_morts)
     message.react('🤬')
     message.react('💢')
     message.react(impo)
   }
-  else if (message.content.includes("@here")){
+  else if (message.content.includes("@here")) {
     message.react('🐒')
   }
   else if (message.mentions.has(client.user.id) && message.member.id === "240478618206076938") {
@@ -121,7 +124,7 @@ client.on('message', (message) => {
     return
   }
 
-  
+
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();

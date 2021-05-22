@@ -1,39 +1,15 @@
-const apiEndpoint = 'https://discord.com/api/v8/applications/589466442961911840/guilds/539794635283890186/commands'
-const botToken = '<bot-token-here>'
+const apiEndpoint = 'https://discord.com/api/v8/applications/589466442961911840/commands'
+const botToken = 'NTg5NDY2NDQyOTYxOTExODQw.XQUFZw.W-RvxtC2zFb1sgU5i04c0LPA0xc'
 const commandData = {
-    "name": "test",
-    "description": "test command",
+    "name": "ask",
+    "description": "ask Esca anything, he'll try his best to respond",
     "options": [
         {
-            "name": "string",
-            "description": "string to test",
+            "name": "question",
+            "description": "question you want to ask.",
             "type": 3,
-            "required": false,
-            "choices": [
-                {
-                    "name": "Magellanic",
-                    "value": "magellanic"
-                },
-                {
-                    "name": "Emperor",
-                    "value": "emperor"
-                },
-                {
-                    "name": "Chinstrap",
-                    "value": "chinstrap"
-                },
-                {
-                    "name": "Gentoo",
-                    "value": "gentoo"
-                }
-            ]
+            "required": true,
         },
-        {
-            "name": "role",
-            "description": "role to test",
-            "type": 8,
-            "required": false
-        }
     ]
   }
 
