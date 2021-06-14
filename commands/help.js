@@ -17,6 +17,7 @@ module.exports = {
         //content
         .addField("among", "Envoie un message pour proposer à tout le monde de jouer à Among Us (utile quand t'as la flemme d'écrire le message toi même grosse feignasse).\n*Exemple :* `?among`", false)
         .addField("aled", "Affiche l'aide. Mais comme le dev est un turbo flemmard, elle est pas encore au point.\n*Exemple :* `?aled`", false)
+        .addField("ask", "Pose moi une question et j'y répondrai ! Attends toi au pire, je fais pas dans la dentelle.\n*Exemple :* `/ask pourquoi la vie ?`", false)
       message.reply(cmd_list)
     }
   },
