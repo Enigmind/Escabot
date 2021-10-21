@@ -36,7 +36,7 @@ client.on("guildMemberRemove", (member) => {
   client.channels.cache
     .get("772194344929067023")
     .send(
-      `**${member.user.username}** was ejected ! He was an Impostor ! \n<:fine:785276116558151690>`
+      `**${member.user.username}** was ejected ! It was an Impostor ! \n<:fine:785276116558151690>`
     );
 });
 
