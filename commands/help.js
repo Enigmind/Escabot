@@ -16,7 +16,7 @@ module.exports = {
         //content
         .addFields(
             { name: 'help', value: "Affiche l'aide. Mais comme le dev est un turbo flemmard, elle est pas encore au point." },
-            { name: '/tldr', value: "T'es une giga feignasse et t'as la flemme de lire le message de ton pote ? Envoie le moi et je te résumme tout ça en 2/3 phrases." },
+            { name: 'Sinon tu peux me tag pour me parler', value: "Je répondrai dans la mesure du possible." },
         )
 
         //footer
