@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/Enigmind/Bot-VK#readme",
   "dependencies": {
+    "@discordjs/builders": "^0.9.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
     "dateformat": "^3.0.3",
-    "discord-welcome": "^2.0.2",
-    "discord.js": "^12.3.1",
+    "discord-api-types": "^0.25.2",
+    "discord-welcome": "^3.0.3",
+    "discord.js": "^13.3.1",
     "node-fetch": "^2.6.1",
     "openai-api": "^1.2.1",
     "request": "^2.88.0"

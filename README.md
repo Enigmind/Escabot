@@ -2,9 +2,6 @@
 ## Description :
 Useless bot for AMONG SUS
 
-## Invite Link :
-https://discordapp.com/oauth2/authorize?client_id=589466442961911840&scope=bot&permissions=8
-
 ## Requirements :
 - NodeJS 12.x mini (https://nodejs.org/en/download/package-manager/)
 - Docker (https://docs.docker.com/engine/install/)
@@ -12,7 +9,7 @@ https://discordapp.com/oauth2/authorize?client_id=589466442961911840&scope=bot&p
 - clone the git repository : `git clone https://github.com/Enigmind/Bot-VK.git`
 - install dependances : `npm install`
 - rename the file `config-example.json` to `config.json`
-- enter your bot token in the `config.json` file and change the prefix if you want.
+- enter your bot bot_token in the `config.json` file and change the prefix if you want.
 - launch bot in terminal : `node esca.js`
 - write the help command in a discord channel : `§help`
 

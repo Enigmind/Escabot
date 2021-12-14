@@ -1,24 +1,26 @@
-const Discord = require('discord.js')
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-  name: 'help',
-  description: "List all of my commands or info about a specific command.",
-  aliases: ['aled', 'commands'],
-  execute(message, args) {
-    if (args.length > 0) {
-      message.channel.send("TODO -> faire des commandes d'aide personnalisées :thinking:")
-    } else {
-      const cmd_list = new Discord.MessageEmbed()
+	data: new SlashCommandBuilder()
+		.setName('help')
+		.setDescription('Display help message'),
+	async execute(interaction) {
+        const cmd_list = new MessageEmbed()
         //header
         .setColor('#800000')
         .setTitle("Liste des commandes")
         .setThumbnail('https://images.emojiterra.com/google/android-pie/512px/2699.png')
 
         //content
-        .addField("among", "Envoie un message pour proposer à tout le monde de jouer à Among Us (utile quand t'as la flemme d'écrire le message toi même grosse feignasse).\n*Exemple :* `?among`", false)
-        .addField("aled", "Affiche l'aide. Mais comme le dev est un turbo flemmard, elle est pas encore au point.\n*Exemple :* `?aled`", false)
-        .addField("ask", "Pose moi une question et j'y répondrai ! Attends toi au pire, je fais pas dans la dentelle.\n*Exemple :* `/ask pourquoi la vie ?`", false)
-      message.reply(cmd_list)
-    }
-  },
+        .addFields(
+            { name: 'help', value: "Affiche l'aide. Mais comme le dev est un turbo flemmard, elle est pas encore au point." },
+            { name: '/tldr', value: "T'es une giga feignasse et t'as la flemme de lire le message de ton pote ? Envoie le moi et je te résumme tout ça en 2/3 phrases." },
+        )
+
+        //footer
+        .setFooter('pd')
+		await interaction.reply({ embeds: [cmd_list] });
+	},
 };

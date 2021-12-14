@@ -1,4 +1,4 @@
-FROM arm32v6/node:14-alpine
+FROM node:latest
 
 WORKDIR /usr/src/bot
 

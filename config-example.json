@@ -1,4 +1,6 @@
 {
-	"prefix": "§",
-	"token": "YOUR-BOT-TOKEN-HERE"
+	"clientId": "YOUR_APPLICATION_ID",
+	"guildId": "DISCORD_SERVER_ID",
+	"bot_token": "YOUR_BOT_TOKEN",
+	"openAI_key": "OPENAI_API_KEY"
 }
