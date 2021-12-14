@@ -16,9 +16,10 @@ module.exports = {
         //content
         .addFields(
             { name: 'help', value: "Affiche l'aide. Mais comme le dev est un turbo flemmard, elle est pas encore au point." },
+            { name: 'cat', value: "Envoie un chat tout mignon pour egayer ta journée." },
             { name: 'Sinon tu peux me tag pour me parler', value: "Je répondrai dans la mesure du possible." },
         )
-
+h
         //footer
         .setFooter('pd')
 		await interaction.reply({ embeds: [cmd_list] });
