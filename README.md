@@ -1,17 +1,22 @@
 # Esca Bot
 ## Description :
-Useless bot for AMONG SUS
+Useless bot originally created for AMONG SUS guild. But can be used for entertainement purposes.
 
 ## Requirements :
-- NodeJS 12.x mini (https://nodejs.org/en/download/package-manager/)
+- NodeJS 16.6 or higher (https://nodejs.org/en/download/package-manager/)
 - Docker (https://docs.docker.com/engine/install/)
+- Access to OpenAI API (create an account [here](https://beta.openai.com/signup))
+
 ## Setup dev environment :
-- clone the git repository : `git clone https://github.com/Enigmind/Bot-VK.git`
+- clone the git repository : `git clone git@github.com:Enigmind/Escabot.git`
 - install dependances : `npm install`
 - rename the file `config-example.json` to `config.json`
-- enter your bot bot_token in the `config.json` file and change the prefix if you want.
+- enter the clientId in the `config.json` (get it [here](https://discord.com/developpers))
+- enter your bot guildId in the `config.json` (copy it from discord client with dev options activated)
+- enter your bot bot_token in the `config.json` (get it [here](https://discord.com/developpers))
+- enter your bot openAI_key in the `config.json` (get it [here](https://beta.openai.com/account/api-keys))
 - launch bot in terminal : `node esca.js`
-- write the help command in a discord channel : `§help`
+- write the help command in a discord channel : `/help`
 
 
 ## Prod :
