@@ -19,7 +19,6 @@ module.exports = {
             { name: 'cat', value: "Envoie un chat tout mignon pour egayer ta journée." },
             { name: 'Sinon tu peux me tag pour me parler', value: "Je répondrai dans la mesure du possible." },
         )
-h
         //footer
         .setFooter('pd')
 		await interaction.reply({ embeds: [cmd_list] });
