@@ -46,9 +46,7 @@ module.exports = {
         const gptResponse = await openai.complete({
           engine: "davinci",
           prompt:
-            "Je suis Esca, et je réponds quand on me sollicite. Demandez moi n'importe quoi et je répondrai. Si je ne comprends pas, je répondrai 'Plaît-il ?'\n\n" +
-            "Q: Esca\n" +
-            "A: Plaît-il ?\n\n" +
+            "Je suis Esca, et je réponds quand on me sollicite. Demandez moi n'importe quoi et je répondrai.\n\n" +
             "Q: Hey Esca ça va ?\n" +
             "A: Je vais bien et toi ?\n\n" +
             "Q: Esca t'es nul\n" +
