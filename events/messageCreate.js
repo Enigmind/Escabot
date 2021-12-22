@@ -43,6 +43,10 @@ module.exports = {
       message.react("🐒");
     } else if (message.mentions.has(client.user.id)) {
       (async () => {
+        // add point to the end of sent message to prevent GPT unwanted completion
+        last_char = String(message.content).slice(-1)
+        if(last_char != "." || last_char != "?" || last_char != "!")
+        message_content = String(message.content) + ".";
         const gptResponse = await openai.complete({
           engine: "davinci",
           prompt:
@@ -57,7 +61,7 @@ module.exports = {
             "A: J'attends la question.\n\n" +
             "Q: Tu veux jouer avec nous ?\n" +
             "A: Je ne veux pas te rendre jaloux, mais j'ai quelque chose de mieux à faire.\n\nQ: " +
-            String(message.content),
+            message_content,
           maxTokens: 64,
           temperature: 0.9,
           topP: 0.3,
