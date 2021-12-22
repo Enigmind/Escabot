@@ -45,7 +45,7 @@ module.exports = {
       (async () => {
         // add point to the end of sent message to prevent GPT unwanted completion
         last_char = String(message.content).slice(-1)
-        if(last_char != "." || last_char != "?" || last_char != "!")
+        if(last_char != "." && last_char != "?" && last_char != "!")
         message_content = String(message.content) + ".";
         const gptResponse = await openai.complete({
           engine: "davinci",
