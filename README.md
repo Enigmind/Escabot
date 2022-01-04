@@ -12,9 +12,9 @@ Useless bot originally created for AMONG SUS guild. But can be used for entertai
 - install dependances : `npm install`
 - rename the file `config-example.json` to `config.json`
 - enter the clientId in the `config.json` (get it [here](https://discord.com/developpers))
-- enter your bot guildId in the `config.json` (copy it from discord client with dev options activated)
-- enter your bot bot_token in the `config.json` (get it [here](https://discord.com/developpers))
-- enter your bot openAI_key in the `config.json` (get it [here](https://beta.openai.com/account/api-keys))
+- enter your bot guild ID in the `config.json` (copy it from discord client with dev options activated)
+- enter your bot token in the `config.json` (get it [here](https://discord.com/developpers))
+- enter your bot openAI key in the `config.json` (get it [here](https://beta.openai.com/account/api-keys))
 - deploy the commands into your server : `node deploy-commands.js`
 - launch bot in terminal : `node esca.js`
 - write the help command in a discord channel : `/help`
