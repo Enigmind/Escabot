@@ -10,6 +10,7 @@ module.exports = {
     const tag_de_ses_morts =
       client.emojis.resolveIdentifier("831548507990261850");
     const impo = client.emojis.resolveIdentifier("831235278822965290");
+    const feur = client.emojis.resolveIdentifier("915665995400634450")
 
     // prevent the bot to respond to itself
     if (message.author == client.user) return;
@@ -33,6 +34,16 @@ module.exports = {
         .catch(() => console.error("One of the emojis failed to react."));
     }
 
+    if (
+      message.content.toLowerCase().includes("quoi")
+      // String(message.content.toLowerCase()).endsWith("quoi") ||
+      // String(message.content.toLowerCase()).endsWith("quoi ?") ||
+      // String(message.content.toLowerCase()).endsWith("quoi?") ||
+      // String(message.content.toLowerCase()).endsWith("quoi.")
+    ) {
+      message.react(feur)
+    }
+
     // react with the deserved emoji for all bastards that @everyone (like tibo)
     if (message.content.includes("@everyone")) {
       message.react(tag_de_ses_morts);
@@ -44,12 +55,11 @@ module.exports = {
     } else if (message.mentions.has(client.user.id)) {
       (async () => {
         // add point to the end of sent message to prevent GPT unwanted completion
-        last_char = String(message.content).slice(-1)
-        if(last_char != "." && last_char != "?" && last_char != "!"){
+        last_char = String(message.content).slice(-1);
+        if (last_char != "." && last_char != "?" && last_char != "!") {
           message_content = String(message.content) + ".";
-        }
-        else{
-          message_content = String(message.content)
+        } else {
+          message_content = String(message.content);
         }
         const gptResponse = await openai.complete({
           engine: "davinci",
