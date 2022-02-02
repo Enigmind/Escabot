@@ -35,11 +35,10 @@ module.exports = {
     }
 
     if (
-      message.content.toLowerCase().includes("quoi")
-      // String(message.content.toLowerCase()).endsWith("quoi") ||
-      // String(message.content.toLowerCase()).endsWith("quoi ?") ||
-      // String(message.content.toLowerCase()).endsWith("quoi?") ||
-      // String(message.content.toLowerCase()).endsWith("quoi.")
+      String(message.content.toLowerCase()).endsWith("quoi") ||
+      String(message.content.toLowerCase()).endsWith("quoi ?") ||
+      String(message.content.toLowerCase()).endsWith("quoi?") ||
+      String(message.content.toLowerCase()).endsWith("quoi.")
     ) {
       message.react(feur)
     }
