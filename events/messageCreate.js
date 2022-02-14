@@ -26,7 +26,7 @@ module.exports = {
         .react("🥒")
         .then(() => message.react("🤏"))
         .catch(() => console.error("One of the emojis failed to react."));
-    } else if (message.content.toLowerCase().includes("bite")) {
+    } else if (message.content.toLowerCase().includes(" bite")) {
       message
         .react("🍆")
         .then(() => message.react("💦"))
