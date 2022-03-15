@@ -1,5 +1,6 @@
 const OpenAI = require("openai-api");
-const { openAI_key } = require("../config.json");
+require("dotenv").config();
+const openAI_key = process.env.OPEN_AI_KEY
 const openai = new OpenAI(openAI_key);
 
 // when a message is sent in a channel
