@@ -11,7 +11,6 @@ module.exports = {
     const tag_de_ses_morts =
       client.emojis.resolveIdentifier("831548507990261850");
     const impo = client.emojis.resolveIdentifier("831235278822965290");
-    const feur = client.emojis.resolveIdentifier("915665995400634450")
 
     // prevent the bot to respond to itself
     if (message.author == client.user) return;
@@ -33,15 +32,6 @@ module.exports = {
         .then(() => message.react("💦"))
         .then(() => message.react("🔞"))
         .catch(() => console.error("One of the emojis failed to react."));
-    }
-
-    if (
-      String(message.content.toLowerCase()).endsWith("quoi") ||
-      String(message.content.toLowerCase()).endsWith("quoi ?") ||
-      String(message.content.toLowerCase()).endsWith("quoi?") ||
-      String(message.content.toLowerCase()).endsWith("quoi.")
-    ) {
-      message.react(feur)
     }
 
     // react with the deserved emoji for all bastards that @everyone (like tibo)
