@@ -66,7 +66,7 @@ module.exports = {
             "Q: Tu veux jouer avec nous ?\n" +
             "A: Je ne veux pas te rendre jaloux, mais j'ai quelque chose de mieux à faire.\n\nQ: " +
             message_content,
-          maxTokens: 64,
+          maxTokens: 256,
           temperature: 0.9,
           topP: 0.3,
           presencePenalty: 0.5,
