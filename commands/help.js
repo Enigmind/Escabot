@@ -16,6 +16,7 @@ module.exports = {
         //content
         .addFields(
             { name: 'help', value: "Affiche l'aide. Mais comme le dev est un turbo flemmard, elle est pas encore au point." },
+            { name: 'clear_candid', value: "Nettoie les salons `#présentation-candidat` et `#qu-en-pensez-vous`." },
             { name: 'pussy', value: "Petit coquinou va... 😏" },
             { name: 'Sinon tu peux me tag pour me parler', value: "Je répondrai dans la mesure du possible." },
         )
