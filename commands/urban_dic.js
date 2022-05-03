@@ -22,7 +22,7 @@ module.exports = {
     ).then((response) => response.json());
 
     if (!list.length) {
-      return interaction.editReply(`No results found for **${term}**.`);
+      return interaction.editReply(`Aucun résultat trouvé pour : **${term}**.`);
     }
 
     const [answer] = list;
