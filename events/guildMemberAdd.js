@@ -2,6 +2,6 @@
 module.exports = {
 	name: 'guildMemberAdd',
 	execute(member) {
-		console.log(`new member in SUS. name is : ${member.user.username}`)
+		// do some things when user pop in server
 	},
 };
