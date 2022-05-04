@@ -16,6 +16,7 @@ module.exports = {
     await interaction.deferReply();
     const term = interaction.options.getString("terme");
     const query = new URLSearchParams({ term });
+    const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` : str);
 
     const { list } = await fetch(
       `https://api.urbandictionary.com/v0/define?${query}`
@@ -26,14 +27,16 @@ module.exports = {
     }
 
     const [answer] = list;
+    const definition = trim(answer.definition, 1024)
+    const example = trim(answer.example, 1024)
 
     const embed = new MessageEmbed()
       .setColor("#EFFF00")
       .setTitle(answer.word)
       .setURL(answer.permalink)
       .addFields(
-        { name: "Definition", value: answer.definition },
-        { name: "Example", value: answer.example },
+        { name: "Definition", value: definition || "oupsie y'a un soucis"},
+        { name: "Example", value: example || "no examples available" },
         {
           name: "Rating",
           value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.`,
