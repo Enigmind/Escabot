@@ -1,19 +1,18 @@
-name: deploy-to-prod
+name: Draw pipeline
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
+  
   build:
+    
     name: Build Image
     runs-on: ubuntu-latest
 
+   
     steps:
-      - name: executing remote ssh commands using ssh key
-        uses: enigmind/Escabot@main
-        with:
-          host: ${{ secrets.AWS_HOST }}
-          username: ${{ secrets.AWS_USER }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          script: whoami
+
+    - name: Check out code
+      uses: actions/checkout@v2
