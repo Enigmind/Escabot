@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: executing remote ssh commands using ssh key
-        uses: enigmind/Escabot@master
+        uses: enigmind/Escabot@main
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USER }}
