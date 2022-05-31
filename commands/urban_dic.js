@@ -27,8 +27,9 @@ module.exports = {
     }
 
     const [answer] = list;
-    const definition = trim(answer.definition, 1024)
-    const example = trim(answer.example, 1024)
+    const definition = trim(answer.definition, 1024).replaceAll("[","").replaceAll("]","")
+    const example = trim(answer.example, 1024).replaceAll("[","").replaceAll("]","")
+    
 
     const embed = new MessageEmbed()
       .setColor("#EFFF00")
