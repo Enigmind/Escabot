@@ -10,7 +10,6 @@ module.exports = {
     //emotes custom
     const tag_de_ses_morts =
       client.emojis.resolveIdentifier("831548507990261850");
-    const impo = client.emojis.resolveIdentifier("831235278822965290");
 
     // prevent the bot to respond to itself
     if (message.author == client.user) return;
@@ -37,9 +36,6 @@ module.exports = {
     // react with the deserved emoji for all bastards that @everyone (like tibo)
     if (message.content.includes("@everyone")) {
       message.react(tag_de_ses_morts);
-      message.react("🤬");
-      message.react("💢");
-      message.react(impo);
     } else if (message.content.includes("@here")) {
       message.react("🐒");
     } else if (message.mentions.has(client.user.id)) {
