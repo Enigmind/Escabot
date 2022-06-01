@@ -1,21 +1,21 @@
 {
-  "name": "bot-vk",
-  "version": "1.7.0",
-  "description": "discord bot for veritas kingdom",
-  "main": "vk_bot.js",
+  "name": "escabot",
+  "version": "1.9.0",
+  "description": "useless piece of shit",
+  "main": "esca.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Enigmind/Bot-VK.git"
+    "url": "git+https://github.com/Enigmind/Escabot.git"
   },
   "author": "Enigmind",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Enigmind/Bot-VK/issues"
+    "url": "https://github.com/Enigmind/Escabot/issues"
   },
-  "homepage": "https://github.com/Enigmind/Bot-VK#readme",
+  "homepage": "https://github.com/Enigmind/Escabot#readme",
   "dependencies": {
     "@discordjs/builders": "^0.9.0",
     "@discordjs/rest": "^0.1.0-canary.0",
