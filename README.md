@@ -14,7 +14,7 @@ Useless bot originally created for AMONG SUS guild. But can be used for entertai
 - enter the clientId in the `.env` (get it [here](https://discord.com/developpers))
 - enter your bot guild ID in the `.env` (copy it from discord client with dev options activated)
 - enter your bot token in the `.env` (get it [here](https://discord.com/developpers))
-- enter your bot openAI key in the `.env` (get it [here](https://beta.openai.com/account/api-keys))
+- enter your openAI key in the `.env` (get it [here](https://beta.openai.com/account/api-keys))
 - deploy the commands into your server : `node deploy-commands.js`
 - launch bot in terminal : `node esca.js`
 - write the help command in a discord channel : `/help`
