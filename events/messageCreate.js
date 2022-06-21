@@ -23,7 +23,7 @@ module.exports = {
     const chloé = message.guild.members.cache.find((r) => r.id === "358335055761899520")
     const irritating_things_list = ["t'es ez", "t’es ez", "t ez"];
     if (irritating_things_list.some((str) =>message.content.toLowerCase().includes(str))) {
-      if (message.author == chloé){
+      if (message.member == chloé){
         message.reply("Allez tu m'as saoulé tu prends 5 minutes. T'as réussi à trigger un bot bravo.")
         message.member
           .timeout(5 * 60 * 1000, "Hopla ça lui fera les pieds à cette Gouape")
