@@ -1,6 +1,6 @@
 const OpenAI = require("openai-api");
 require("dotenv").config();
-const openAI_key = process.env.OPEN_AI_KEY
+const openAI_key = process.env.OPEN_AI_KEY;
 const openai = new OpenAI(openAI_key);
 
 // when a message is sent in a channel
@@ -17,6 +17,15 @@ module.exports = {
     // delete les messages du puni
     if (message.member.roles.cache.find((r) => r.id === "831986434373844994")) {
       message.delete();
+    }
+
+    // timeout chloé when she says irritating things
+    const irritating_things_list = ["t'es ez", "t ez"];
+    if (irritating_things_list.some((str) =>message.content.toLowerCase().includes(str))) {
+      message.reply("Allez tu m'as saoulé tu prends 5 minutes. T'as réussi à trigger un bot bravo.")
+      message.member
+        .timeout(5 * 60 * 1000, "Hopla ça lui fera les pieds à cette Gouape")
+        .catch(console.error);
     }
 
     // react when somone says "bite" or "petite bite"
