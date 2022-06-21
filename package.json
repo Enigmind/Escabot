@@ -1,6 +1,6 @@
 {
   "name": "escabot",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "useless piece of shit",
   "main": "esca.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "dateformat": "^3.0.3",
     "discord-api-types": "^0.25.2",
     "discord-welcome": "^3.0.3",
-    "discord.js": "^13.3.1",
+    "discord.js": "^13.8.0",
     "dotenv": "^16.0.0",
     "node-fetch": "^2.6.1",
     "openai-api": "^1.2.1",
