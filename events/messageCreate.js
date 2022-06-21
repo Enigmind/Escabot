@@ -20,12 +20,19 @@ module.exports = {
     }
 
     // timeout chloé when she says irritating things
-    const irritating_things_list = ["t'es ez", "t ez"];
+    const chloé = message.guild.members.cache.find((r) => r.id === "358335055761899520")
+    const irritating_things_list = ["t'es ez", "t’es ez", "t ez"];
     if (irritating_things_list.some((str) =>message.content.toLowerCase().includes(str))) {
-      message.reply("Allez tu m'as saoulé tu prends 5 minutes. T'as réussi à trigger un bot bravo.")
-      message.member
-        .timeout(5 * 60 * 1000, "Hopla ça lui fera les pieds à cette Gouape")
-        .catch(console.error);
+      if (message.author == chloé){
+        message.reply("Allez tu m'as saoulé tu prends 5 minutes. T'as réussi à trigger un bot bravo.")
+        message.member
+          .timeout(5 * 60 * 1000, "Hopla ça lui fera les pieds à cette Gouape")
+          .catch(console.error);
+      }
+      else {
+        message.reply("Arrête de te prendre pour Chloé ou je me fâche..")
+      }
+      
     }
 
     // react when somone says "bite" or "petite bite"
