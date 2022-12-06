@@ -1,6 +1,6 @@
 {
   "name": "escabot",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "useless piece of shit",
   "main": "esca.js",
   "scripts": {

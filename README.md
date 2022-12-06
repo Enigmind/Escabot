@@ -1,6 +1,6 @@
 # Esca Bot
 ## Description :
-Useless bot originally created for AMONG SUS guild. But can be used for entertainement purposes.
+Useless sarcastic bot. But can be fun sometimes..
 
 ## Requirements :
 - NodeJS 16.6 or higher (https://nodejs.org/en/download/package-manager/)
@@ -23,6 +23,6 @@ Useless bot originally created for AMONG SUS guild. But can be used for entertai
 ## Prod :
 - build the docker image : `docker build -t esca-bot .`
 
-(if you wanna run the bot on a raspberry pi, change the base image in the dockerfile into `arm32v6/node:14-alpine`)
+(if you wanna run the bot on a raspberry pi, change the base image in the dockerfile into `arm32v6/node:16-alpine`)
 
 - run the container : `docker run -d esca-bot`
