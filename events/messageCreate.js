@@ -4,7 +4,8 @@ const openAI_key = process.env.OPEN_AI_KEY;
 const openai = new OpenAI(openAI_key);
 
 function randomResponse(){
-  number = Math.floor(Math.random() * 100);
+  number = Math.floor(Math.random() * 200);
+  console.log(number)
   if(number == 69){
     return true
   } else {
