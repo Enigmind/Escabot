@@ -5,7 +5,6 @@ const openai = new OpenAI(openAI_key);
 
 function randomResponse(){
   number = Math.floor(Math.random() * 100);
-  console.log(number)
   if(number == 69){
     return true
   } else {
