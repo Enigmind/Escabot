@@ -3,16 +3,29 @@ require("dotenv").config();
 const openAI_key = process.env.OPEN_AI_KEY;
 const openai = new OpenAI(openAI_key);
 
+function randomResponse(){
+  number = Math.floor(Math.random() * 100);
+  console.log(number)
+  if(number == 69){
+    return true
+  } else {
+    return false
+  }
+}
+
 // when a message is sent in a channel
 module.exports = {
   name: "messageCreate",
-  execute(message) {
-    //emotes custom
-    const tag_de_ses_morts =
-      client.emojis.resolveIdentifier("831548507990261850");
+  execute(message) { 
 
     // prevent the bot to respond to itself
     if (message.author == client.user) return;
+
+    //emotes custom
+    const tag_de_ses_morts =
+      client.emojis.resolveIdentifier("831548507990261850");
+    
+    const escaDoitIlRepondre = randomResponse()
 
     // delete les messages du puni
     if (message.member.roles.cache.find((r) => r.id === "831986434373844994")) {
@@ -38,7 +51,7 @@ module.exports = {
       message.react(tag_de_ses_morts);
     } else if (message.content.includes("@here")) {
       message.react("🐒");
-    } else if (message.mentions.has(client.user.id)) {
+    } else if (message.mentions.has(client.user.id) || escaDoitIlRepondre) {
       (async () => {
         // add point to the end of sent message to prevent GPT unwanted completion
         last_char = String(message.content).slice(-1);
