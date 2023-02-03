@@ -21,8 +21,6 @@ module.exports = {
             { name: 'pussy', value: "Petit coquinou va... 😏" },
             { name: 'Sinon tu peux me tag pour me parler', value: "Je répondrai dans la mesure du possible." },
         )
-        //footer
-        .setFooter('pd')
 		await interaction.reply({ embeds: [cmd_list] });
 	},
 };
