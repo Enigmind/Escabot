@@ -7,8 +7,4 @@ RUN npm ci
 
 COPY . /usr/src/bot/
 
-# deploy/updates slash commands
-# RUN node deploy-command.js
-
-
 CMD ["node", "esca.js"]
