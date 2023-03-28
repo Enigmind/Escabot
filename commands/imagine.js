@@ -21,15 +21,21 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    await interaction.deferReply();
-    const user_prompt = interaction.options.getString("prompt");
-    const response = await openai.createImage({
+  await interaction.deferReply();
+  const user_prompt = interaction.options.getString("prompt");
+  
+  try {
+    const openaiResponse = await openai.createImage({
       prompt: user_prompt,
       n: 1,
       size: "1024x1024",
     });
-    image_url = response['data'][0]['url']
-    
-    interaction.editReply(image_url)
-  },
+
+    const image_url = openaiResponse.data.data[0].url;
+    interaction.editReply({ content: image_url });
+  } catch (error) {
+    console.error(error);
+    interaction.editReply({ content: 'An error occurred while generating the image.' });
+  }
+},
 };
