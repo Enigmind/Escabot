@@ -16,7 +16,7 @@ module.exports = {
         //content
         .addFields(
             { name: 'help', value: "Affiche l'aide. Mais comme le dev est un turbo flemmard, elle est pas encore au point." },
-            { name: 'clear_candid', value: "Nettoie les salons `#présentation-candidat` et `#qu-en-pensez-vous`." },
+            { name: 'imagine', value: "Génère une image. Demande moi n'importe quoi et laisse toi suprendre !" },
             { name: 'urban_dic', value: "Donne la définition d'un terme anglophone. La réponse est en anglais, je ne suis pas un traducteur." },
             { name: 'pussy', value: "Petit coquinou va... 😏" },
             { name: 'Sinon tu peux me tag pour me parler', value: "Je répondrai dans la mesure du possible." },
