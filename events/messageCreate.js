@@ -73,7 +73,7 @@ module.exports = {
           top_p: 0.3,
           presence_penalty: 0.5,
           frequency_penalty: 1,
-          bestOf: 1,
+          best_of: 1,
           n: 1,
           stream: false,
           stop: "Q:",
