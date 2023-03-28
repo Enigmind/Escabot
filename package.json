@@ -20,7 +20,7 @@
     "@discordjs/builders": "^0.9.0",
     "@discordjs/rest": "^0.1.0-canary.0",
     "dateformat": "^3.0.3",
-    "discord-api-types": "^0.25.2",
+    "discord-api-types": "^0.37.37",
     "discord-welcome": "^3.0.3",
     "discord.js": "^13.8.0",
     "dotenv": "^16.0.0",
