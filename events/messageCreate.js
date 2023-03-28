@@ -1,15 +1,13 @@
-const OpenAI = require("openai-api");
-require("dotenv").config();
-const openAI_key = process.env.OPEN_AI_KEY;
-const openai = new OpenAI(openAI_key);
+const { Configuration, OpenAIApi } = require("openai");
+
+const configuration = new Configuration({
+  apiKey: process.env.OPEN_AI_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
 function randomResponse(){
   number = Math.floor(Math.random() * 200);
-  if(number == 69){
-    return true
-  } else {
-    return false
-  }
+  return number == 69;
 }
 
 // when a message is sent in a channel
@@ -59,8 +57,8 @@ module.exports = {
         } else {
           message_content = String(message.content);
         }
-        const gptResponse = await openai.complete({
-          engine: "text-davinci-002",
+        const gptResponse = await openai.createCompletion({
+          model: "text-davinci-002",
           prompt:
             "Esca est un robot entrainé pour le clash, essayez de lui parler pour découvrir de nouvelles punchlines.\n\n" +
             "Q: Esca t'es nul.\n" +
@@ -70,17 +68,17 @@ module.exports = {
             "Q: Tu veux jouer avec nous ?\n" +
             "A: Je ne veux pas te rendre jaloux, mais j'ai quelque chose de mieux à faire.\n\nQ: " +
             message_content,
-          maxTokens: 256,
+          max_tokens: 256,
           temperature: 0.9,
-          topP: 0.3,
-          presencePenalty: 0.5,
-          frequencyPenalty: 0,
+          top_p: 0.3,
+          presence_penalty: 0.5,
+          frequency_penalty: 1,
           bestOf: 1,
           n: 1,
           stream: false,
           stop: "Q:",
         });
-        mes = gptResponse.data.choices[0].text.replace("A:", "");
+        let mes = gptResponse.data.choices[0].text.replace("A:", "");
         message.reply(mes);
       })();
     }
