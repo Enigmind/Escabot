@@ -16,7 +16,8 @@ module.exports = {
 
     if (author === client.user) return;
 
-    const tag_de_ses_morts = client.emojis.resolveIdentifier("831548507990261850");
+    const tag_de_ses_morts =
+      client.emojis.resolveIdentifier("831548507990261850");
     const escaDoitIlRepondre = randomResponse();
 
     if (member.roles.cache.has("831986434373844994")) {
@@ -25,9 +26,16 @@ module.exports = {
 
     const lowerContent = content.toLowerCase();
     if (lowerContent.includes("petite bite")) {
-      message.react("🥒").then(() => message.react("🤏")).catch(console.error);
+      message
+        .react("🥒")
+        .then(() => message.react("🤏"))
+        .catch(console.error);
     } else if (lowerContent.includes(" bite")) {
-      message.react("🍆").then(() => message.react("💦")).then(() => message.react("🔞")).catch(console.error);
+      message
+        .react("🍆")
+        .then(() => message.react("💦"))
+        .then(() => message.react("🔞"))
+        .catch(console.error);
     }
 
     if (content.includes("@everyone")) {
