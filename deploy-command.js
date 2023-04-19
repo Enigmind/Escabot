@@ -19,3 +19,8 @@ const rest = new REST({ version: '9' }).setToken(bot_token);
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);
+
+// delete command
+// rest.delete(Routes.applicationGuildCommand(clientId, guildId, 'commandID'))
+// 	.then(() => console.log('Successfully deleted guild command'))
+// 	.catch(console.error);
