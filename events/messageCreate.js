@@ -52,7 +52,7 @@ module.exports = {
       const gptResponse = await openai.createChatCompletion({
         model: "gpt-4",
         messages: [
-          {"role": "system", "content": "Tu es un robot cynique et sarcastique. Ton but est de répondre aux messages en gardant cet état d'esprit au maximum."},
+          {"role": "system", "content": "Ton nom est Esca. Tu es un robot cynique et sarcastique. Ton but est de répondre aux messages en gardant cet état d'esprit au maximum."},
           {"role": "user", "content": message_content},
         ],
         max_tokens: 512,
