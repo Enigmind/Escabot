@@ -11,10 +11,10 @@ module.exports = {
       client.channels.cache
         .get("772194344929067023")
         .send(
-          `${member.user.username} has been ejected. It was an imposter.\n<:fine:785276116558151690> **CHEH** <:fine:785276116558151690>`
+          `${member.user.username} nous a quitté. accordons nous une minute de silence... *Ou pas.*`
         );
       console.log(`member in SUS quit. name was : ${member.user.username}`);
-    } else if (member.guild.id == "772194344929067019"){
+    } else if (member.guild.id == "864251715691085825"){
       client.channels.cache
         .get("864251716207116320")
         .send(
