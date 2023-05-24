@@ -1,3 +1,4 @@
+const { Channel } = require("discord.js");
 const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
@@ -16,6 +17,7 @@ module.exports = {
 
     if (author === client.user) return;
 
+    const channel = client.channels.cache.get(message.channel.id);
     const tag_de_ses_morts =
       client.emojis.resolveIdentifier("831548507990261850");
     const escaDoitIlRepondre = randomResponse();
@@ -38,23 +40,38 @@ module.exports = {
         .catch(console.error);
     }
 
+    async function getContext() {
+  let context = [];
+
+  await channel.messages.fetch({ limit: 6 }).then((messages) => {
+    messages.forEach((message) => {
+      if (message.author === client.user) {
+        context.push({ "role": "assistant", "content": message.content });
+      } else {
+        context.push({ "role": "user", "content": message.content });
+      }
+    });
+  });
+
+  context.push(
+    {
+      "role": "system",
+      "content": "Ton nom est Esca. Tu es un robot cynique et sarcastique. Ton but est de répondre aux messages en gardant cet état d'esprit au maximum.",
+    },
+  )
+
+  // La chaine de message est inversée du au fetch.
+  return context.reverse();
+}
+
     if (content.includes("@everyone")) {
       message.react(tag_de_ses_morts);
     } else if (content.includes("@here")) {
       message.react("🐒");
     } else if (message.mentions.has(client.user.id) || escaDoitIlRepondre) {
-      const last_char = content.slice(-1);
-      const message_content =
-        last_char !== "." && last_char !== "?" && last_char !== "!"
-          ? content + "."
-          : content;
-
       const gptResponse = await openai.createChatCompletion({
         model: "gpt-4",
-        messages: [
-          {"role": "system", "content": "Ton nom est Esca. Tu es un robot cynique et sarcastique. Ton but est de répondre aux messages en gardant cet état d'esprit au maximum."},
-          {"role": "user", "content": message_content},
-        ],
+        messages: await getContext(),
         max_tokens: 512,
         temperature: 0.9,
         presence_penalty: 0.5,
