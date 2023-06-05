@@ -41,34 +41,34 @@ module.exports = {
     }
 
     async function getContext() {
-  let context = [];
+      let context = [];
 
-  await channel.messages.fetch({ limit: 6 }).then((messages) => {
-    messages.forEach((message) => {
-      if (message.author === client.user) {
-        context.push({ "role": "assistant", "content": message.content });
-      } else {
-        context.push({ "role": "user", "content": message.content });
-      }
-    });
-  });
+      await channel.messages.fetch({ limit: 6 }).then((messages) => {
+        messages.forEach((message) => {
+          if (message.author === client.user) {
+            context.push({ role: "assistant", content: message.content });
+          } else {
+            context.push({ role: "user", content: message.content });
+          }
+        });
+      });
 
-  context.push(
-    {
-      "role": "system",
-      "content": "Ton nom est Esca. Tu es un robot cynique et sarcastique. Ton but est de répondre aux messages en gardant cet état d'esprit au maximum.",
-    },
-  )
+      context.push({
+        role: "system",
+        content:
+          "Ton nom est Esca. Tu es un robot cynique et sarcastique. Ton but est de répondre aux messages en gardant cet état d'esprit au maximum.",
+      });
 
-  // La chaine de message est inversée du au fetch.
-  return context.reverse();
-}
+      // La chaine de message est inversée du au fetch.
+      return context.reverse();
+    }
 
     if (content.includes("@everyone")) {
       message.react(tag_de_ses_morts);
     } else if (content.includes("@here")) {
       message.react("🐒");
     } else if (message.mentions.has(client.user.id) || escaDoitIlRepondre) {
+      await message.channel.sendTyping();
       const gptResponse = await openai.createChatCompletion({
         model: "gpt-4",
         messages: await getContext(),
