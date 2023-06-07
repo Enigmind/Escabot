@@ -68,7 +68,19 @@ module.exports = {
     } else if (content.includes("@here")) {
       message.react("🐒");
     } else if (message.mentions.has(client.user.id) || escaDoitIlRepondre) {
-      await message.channel.sendTyping();
+      const sendTyping = async () => {
+        await message.channel.sendTyping();
+      };
+      // Esca is typing...
+      sendTyping().catch((error) => {
+        console.error('Error while typing :', error);
+      });
+      const typingInterval = setInterval(() => {
+        sendTyping().catch((error) => {
+          console.error('Error while typing :', error);
+        });
+      }, 9000);
+
       const gptResponse = await openai.createChatCompletion({
         model: "gpt-4",
         messages: await getContext(),
@@ -79,6 +91,9 @@ module.exports = {
         n: 1,
         stream: false,
       });
+
+      // Stop typing when response is ready
+      clearInterval(typingInterval);
 
       const mes = gptResponse.data.choices[0].message.content;
       message.reply(mes);
