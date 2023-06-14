@@ -22,7 +22,7 @@ module.exports = {
       client.emojis.resolveIdentifier("831548507990261850");
     const escaDoitIlRepondre = randomResponse();
 
-    if (member.roles.cache.has("831986434373844994")) {
+    if (member.roles.cache.has("1098324055389646868")) {
       message.delete();
     }
 
