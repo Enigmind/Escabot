@@ -59,7 +59,7 @@ module.exports = {
           "Ton nom est Esca. Tu es un robot cynique et sarcastique. Ton but est de répondre aux messages en gardant cet état d'esprit au maximum.",
       });
 
-      // La chaine de message est inversée du au fetch.
+      // the string is reversed because of the fetch.
       return context.reverse();
     }
 
@@ -68,16 +68,21 @@ module.exports = {
     } else if (content.includes("@here")) {
       message.react("🐒");
     } else if (message.mentions.has(client.user.id) || escaDoitIlRepondre) {
+      // Définir l'intervalle de frappe
+      let typingInterval;
+
       const sendTyping = async () => {
         await message.channel.sendTyping();
       };
+
       // Esca is typing...
       sendTyping().catch((error) => {
-        console.error('Error while typing :', error);
+        console.error("Error while typing :", error);
       });
-      const typingInterval = setInterval(() => {
+
+      typingInterval = setInterval(() => {
         sendTyping().catch((error) => {
-          console.error('Error while typing :', error);
+          console.error("Error while typing :", error);
         });
       }, 9000);
 
@@ -92,11 +97,25 @@ module.exports = {
         stream: false,
       });
 
-      // Stop typing when response is ready
-      clearInterval(typingInterval);
+      // Fetch the message content from the GPT response
+      const GPTResponse = gptResponse.data.choices[0].message.content;
 
-      const mes = gptResponse.data.choices[0].message.content;
-      message.reply(mes);
+      // Remove any leading "Ah," or "Oh," interjections from the message, and also trim white spaces at the start and end of the string
+      const message_without_interjection = GPTResponse.replace(
+        /^(Ah,|Oh,)/,
+        ""
+      ).trim();
+
+      // Capitalize the first character of the message and concatenate it with the rest of the message
+      const final_message =
+        message_without_interjection.charAt(0).toUpperCase() +
+        message_without_interjection.slice(1);
+
+      // Send the final message as a reply
+      message.reply(final_message);
+
+      // Arrêter l'intervalle de frappe après l'envoi du message
+      clearInterval(typingInterval);
     }
   },
 };
