@@ -26,6 +26,7 @@ module.exports = {
 
     try {
       const openaiResponse = await openai.createImage({
+        model: "dall-e-3",
         prompt: user_prompt,
         n: 1,
         size: "1024x1024",
