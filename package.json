@@ -3,6 +3,9 @@
   "version": "2.2",
   "description": "useless piece of shit",
   "main": "esca.js",
+  "engines": {
+    "node": "19"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
