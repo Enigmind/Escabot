@@ -38,7 +38,7 @@ module.exports = {
         .then((arrayBuffer) => Buffer.from(arrayBuffer));
 
       await interaction.editReply({
-        files:[image]
+        files: [image]
       });
     } catch (error) {
       console.error(error);
