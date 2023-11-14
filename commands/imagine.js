@@ -33,10 +33,16 @@ module.exports = {
       });
 
       const image_url = openaiResponse.data.data[0].url;
-      interaction.editReply({ content: image_url });
+      const image = await fetch(image_url)
+        .then((response) => response.arrayBuffer())
+        .then((arrayBuffer) => Buffer.from(arrayBuffer));
+
+      await interaction.editReply({
+        files:[image]
+      });
     } catch (error) {
       console.error(error);
-      interaction.editReply({
+      await interaction.editReply({
         content: "An error occurred while generating the image.",
       });
     }
