@@ -3,4 +3,4 @@ config.json
 ssh-prod.sh
 .env
 .idea
-
+npm-debug.log
