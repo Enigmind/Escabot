@@ -2,7 +2,7 @@
   "name": "escabot",
   "version": "2.2",
   "description": "useless piece of shit",
-  "main": "esca.js",
+  "main": "src/esca.js",
   "engines": {
     "node": "19.9.0"
   },
