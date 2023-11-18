@@ -1,7 +1,8 @@
-const { SlashCommandBuilder, MessageAttachment } = require('@discordjs/builders');
-const fetch = require('node-fetch');
+import { SlashCommandBuilder } from '@discordjs/builders';
 
-module.exports = {
+import fetch from 'node-fetch';
+
+export default {
   data: new SlashCommandBuilder().setName('pussy').setDescription('Petit coquinou va...'),
   async execute(interaction) {
     await interaction.deferReply();
