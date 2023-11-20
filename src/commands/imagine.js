@@ -39,8 +39,9 @@ module.exports = {
       });
     } catch (error) {
       console.error(error);
+      const status_code = error.response.status;
       await interaction.editReply({
-        content: 'An error occurred while generating the image.',
+        content: 'https://http.cat/' + status_code,
       });
     }
   },
