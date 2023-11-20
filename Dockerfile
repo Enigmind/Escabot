@@ -7,4 +7,4 @@ RUN npm ci --omit dev
 
 COPY . /usr/src/bot/
 
-CMD ["node", "esca.js"]
+CMD ["node", "src/esca.js"]
