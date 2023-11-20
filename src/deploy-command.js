@@ -8,7 +8,7 @@ const guildId = process.env.GUILD_ID;
 const bot_token = process.env.BOT_TOKEN;
 
 const commands = [];
-const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./src/commands').filter((file) => file.endsWith('.js'));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
