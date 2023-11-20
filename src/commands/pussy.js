@@ -13,9 +13,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
       await interaction.editReply({
-        content: 'Pas de poti chat trouvé..',
-        ephemeral: false,
-        files: ['images/404.jpeg'],
+        content: 'https://http.cat/599',
       });
     }
   },
