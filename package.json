@@ -2,12 +2,12 @@
   "name": "escabot",
   "version": "2.2",
   "description": "useless piece of shit",
-  "main": "esca.js",
+  "main": "src/esca.js",
   "engines": {
-    "node": "19"
+    "node": "19.9.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier -w src"
   },
   "repository": {
     "type": "git",
@@ -29,5 +29,8 @@
     "dotenv": "^16.0.0",
     "node-fetch": "^2.6.1",
     "openai": "^3.2.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.0"
   }
 }
