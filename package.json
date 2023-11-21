@@ -28,6 +28,7 @@
     "discord-welcome": "^3.0.3",
     "discord.js": "^13.8.0",
     "dotenv": "^16.0.0",
+    "env-var": "^7.4.1",
     "node-fetch": "^2.6.1",
     "openai": "^3.2.1"
   },

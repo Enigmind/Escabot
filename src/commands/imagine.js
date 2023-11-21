@@ -1,9 +1,10 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 
 import { Configuration, OpenAIApi } from 'openai';
+import { config } from '../config.js';
 
 const configuration = new Configuration({
-  apiKey: process.env.OPEN_AI_KEY,
+  apiKey: config.openAi.apiKey,
 });
 const openai = new OpenAIApi(configuration);
 
