@@ -1,5 +1,4 @@
-const { Channel } = require('discord.js');
-const { Configuration, OpenAIApi } = require('openai');
+import { Configuration, OpenAIApi } from 'openai';
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY,
@@ -10,7 +9,7 @@ function randomResponse() {
   return Math.floor(Math.random() * 200) === 69;
 }
 
-module.exports = {
+export default {
   name: 'messageCreate',
   async execute(message) {
     const { author, content, member } = message;

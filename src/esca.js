@@ -1,8 +1,10 @@
-const fs = require('fs');
-const { Client, Collection, Intents, Options } = require('discord.js');
-const Welcome = require('discord-welcome');
+import fs from 'fs';
+import { Client, Collection } from 'discord.js';
 
-require('dotenv').config();
+import Welcome from 'discord-welcome';
+import { config } from 'dotenv';
+
+config();
 const bot_token = process.env.BOT_TOKEN;
 
 const client = new Client({
@@ -19,7 +21,7 @@ const commandFiles = fs.readdirSync('./src/commands').filter((file) => file.ends
 const eventFiles = fs.readdirSync('./src/events').filter((file) => file.endsWith('.js'));
 
 for (const file of eventFiles) {
-  const event = require(`./events/${file}`);
+  const { default: event } = await import(`./events/${file}`);
   if (event.once) {
     client.once(event.name, (...args) => event.execute(...args));
   } else {
@@ -28,7 +30,7 @@ for (const file of eventFiles) {
 }
 
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
+  const { default: command } = await import(`./commands/${file}`);
   client.commands.set(command.data.name, command);
 }
 

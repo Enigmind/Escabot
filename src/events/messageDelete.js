@@ -1,5 +1,5 @@
 // when a message is sent in a channel
-module.exports = {
+export default {
   name: 'messageCreate',
   execute(message) {
     // Ignore direct messages

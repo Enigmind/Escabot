@@ -1,8 +1,8 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+import { SlashCommandBuilder } from '@discordjs/builders';
 
-const { MessageEmbed } = require('discord.js');
+import { MessageEmbed } from 'discord.js';
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder().setName('help').setDescription('Display help message'),
   async execute(interaction) {
     const cmd_list = new MessageEmbed()
