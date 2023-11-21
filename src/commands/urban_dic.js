@@ -1,8 +1,10 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
-const fetch = require('node-fetch');
+import { SlashCommandBuilder } from '@discordjs/builders';
 
-module.exports = {
+import { MessageEmbed } from 'discord.js';
+
+import fetch from 'node-fetch';
+
+export default {
   data: new SlashCommandBuilder()
     .setName('urban_dic')
     .setDescription("Donne la définition d'un terme anglophone")

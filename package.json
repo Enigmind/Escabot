@@ -1,5 +1,6 @@
 {
   "name": "escabot",
+  "type": "module",
   "version": "2.2",
   "description": "useless piece of shit",
   "main": "src/esca.js",

@@ -1,5 +1,5 @@
 // Need to work on it while Esca in production is sleeping
-module.exports = {
+export default {
   name: 'guildMemberRemove',
   execute(member) {
     // test server
