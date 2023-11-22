@@ -2,10 +2,7 @@ import fs from 'fs';
 import { Client, Collection } from 'discord.js';
 
 import Welcome from 'discord-welcome';
-import { config } from 'dotenv';
-
-config();
-const bot_token = process.env.BOT_TOKEN;
+import { config } from './config.js';
 
 const client = new Client({
   intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_EMOJIS_AND_STICKERS', 'GUILD_MEMBERS'],
@@ -67,4 +64,4 @@ Welcome(client, {
   },
 });
 
-client.login(bot_token);
+await client.login(config.discord.botToken);

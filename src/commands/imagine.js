@@ -1,11 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-
-import { Configuration, OpenAIApi } from 'openai';
-
-const configuration = new Configuration({
-  apiKey: process.env.OPEN_AI_KEY,
-});
-const openai = new OpenAIApi(configuration);
+import { openai } from '../helpers/openai.js';
 
 // use openAI api to generate an image according to the prompt
 export default {
