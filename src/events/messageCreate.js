@@ -1,10 +1,4 @@
-import { Configuration, OpenAIApi } from 'openai';
-import { config } from '../config.js';
-
-const configuration = new Configuration({
-  apiKey: config.openAi.apiKey,
-});
-const openai = new OpenAIApi(configuration);
+import { openai } from '../helpers/openai.js';
 
 function randomResponse() {
   return Math.floor(Math.random() * 200) === 69;
