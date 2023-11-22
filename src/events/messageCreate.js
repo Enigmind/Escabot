@@ -1,9 +1,4 @@
-import { Configuration, OpenAIApi } from 'openai';
-
-const configuration = new Configuration({
-  apiKey: process.env.OPEN_AI_KEY,
-});
-const openai = new OpenAIApi(configuration);
+import { openai } from '../helpers/openai.js';
 
 function randomResponse() {
   return Math.floor(Math.random() * 200) === 69;

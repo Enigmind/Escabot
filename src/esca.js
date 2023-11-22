@@ -1,12 +1,7 @@
 import { Client, Collection } from 'discord.js';
 
 import Welcome from 'discord-welcome';
-import { config } from 'dotenv';
-import { commands } from './commands/index.js';
-import { events } from './events/index.js';
-
-config();
-const bot_token = process.env.BOT_TOKEN;
+import { config } from './config.js';
 
 const client = new Client({
   intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_EMOJIS_AND_STICKERS', 'GUILD_MEMBERS'],
@@ -63,4 +58,4 @@ Welcome(client, {
   },
 });
 
-await client.login(bot_token);
+await client.login(config.discord.botToken);
