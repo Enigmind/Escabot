@@ -2,6 +2,8 @@ import { Client, Collection } from 'discord.js';
 
 import Welcome from 'discord-welcome';
 import { config } from './config.js';
+import { events } from './events/index.js';
+import { commands } from './commands/index.js';
 
 const client = new Client({
   intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_EMOJIS_AND_STICKERS', 'GUILD_MEMBERS'],
