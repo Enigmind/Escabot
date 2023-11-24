@@ -21,7 +21,7 @@ export default {
 
   async execute(interaction) {
     await interaction.deferReply();
-    const long_text = interaction.options.getString('input');
+    const longText = interaction.options.getString('input');
 
     try {
       const gptResponse = await openai.createChatCompletion({
@@ -36,7 +36,7 @@ export default {
             role: 'user',
             content:
               "Voici le texte, si il n'est pas en français, traduis le stp :\n" +
-              long_text +
+              longText +
               '\nTL;DR.',
           },
         ],
@@ -48,8 +48,8 @@ export default {
         stream: false,
       });
 
-      const short_text = gptResponse.data.choices[0].message.content;
-      interaction.editReply({ content: short_text });
+      const shortText = gptResponse.data.choices[0].message.content;
+      interaction.editReply({ content: shortText });
     } catch (error) {
       console.error(error);
       interaction.editReply({

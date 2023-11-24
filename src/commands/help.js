@@ -5,7 +5,7 @@ import { MessageEmbed } from 'discord.js';
 export default {
   data: new SlashCommandBuilder().setName('help').setDescription('Display help message'),
   async execute(interaction) {
-    const cmd_list = new MessageEmbed()
+    const cmdList = new MessageEmbed()
       //header
       .setColor('#800000')
       .setTitle('Liste des commandes')
@@ -34,6 +34,6 @@ export default {
           value: 'Je répondrai dans la mesure du possible.',
         },
       );
-    await interaction.reply({ embeds: [cmd_list] });
+    await interaction.reply({ embeds: [cmdList] });
   },
 };

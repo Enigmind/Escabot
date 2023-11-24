@@ -1,21 +1,21 @@
 # Esca Bot
 ## Description :
-Useless sarcastic bot. But can be fun sometimes..
+Useless sarcastic bot. But it can be fun sometimes...
 
 ## Requirements :
-- NodeJS 16.6 or higher (https://nodejs.org/en/download/package-manager/)
+- Node.js 16.6 or higher (https://nodejs.org/en/download/package-manager/)
 - Docker (https://docs.docker.com/engine/install/)
 - Access to OpenAI API (create an account [here](https://beta.openai.com/signup))
 
 ## Setup dev environment :
 - clone the git repository : `git clone git@github.com:Enigmind/Escabot.git`
-- install dependances : `npm install`
+- install dependencies : `npm install`
 - rename the file `example.env` to `.env`
 - enter the clientId in the `.env` (get it [here](https://discord.com/developpers))
-- enter your bot guild ID in the `.env` (copy it from discord client with dev options activated)
+- enter your bot guild ID in the `.env` (copy it from the discord client with dev options activated)
 - enter your bot token in the `.env` (get it [here](https://discord.com/developpers))
 - enter your openAI key in the `.env` (get it [here](https://beta.openai.com/account/api-keys))
-- deploy the commands into your server : `node src/deploy-commands.js`
+- deploy the commands into your server : `node src/deployCommands.js`
 - launch bot in terminal : `node src/esca.js`
 - write the help command in a discord channel : `/help`
 
