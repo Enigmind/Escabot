@@ -17,7 +17,7 @@ export default {
     const userPrompt = interaction.options.getString('prompt');
 
     try {
-      const openaiResponse = await openai.createImage({
+      const openaiResponse = await openai.images.generate({
         model: 'dall-e-3',
         prompt: userPrompt,
         n: 1,

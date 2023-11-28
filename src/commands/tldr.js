@@ -1,12 +1,12 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 
-import { Configuration, OpenAIApi } from 'openai';
+import OpenAI from 'openai';
 import { config } from '../config.js';
 
-const configuration = new Configuration({
+
+const openai = new OpenAI({
   apiKey: config.openAi.apiKey,
 });
-const openai = new OpenAIApi(configuration);
 
 // use openAI api to summarize a long text you're too lazy to read
 export default {
@@ -24,13 +24,13 @@ export default {
     const longText = interaction.options.getString('input');
 
     try {
-      const gptResponse = await openai.createChatCompletion({
+      const gptResponse = await openai.chat.completions.create({
         model: 'gpt-4',
         messages: [
           {
             role: 'system',
             content:
-              "Tu es un robot cynique et sarcastique. Ton but est de résumer les textes que l'on t'envoie en gardant cet état d'esprit au maximum.",
+              "Tu es un robot cynique et sarcastique. Ton but est de résumer les textes que l'on t'envoie en gardant cet état d'esprit au maximum. Essaie de t'exprimer comme si c'était à un enfant de 5 ans.",
           },
           {
             role: 'user',
@@ -48,7 +48,7 @@ export default {
         stream: false,
       });
 
-      const shortText = gptResponse.data.choices[0].message.content;
+      const shortText = gptResponse.choices[0].message.content;
       interaction.editReply({ content: shortText });
     } catch (error) {
       console.error(error);

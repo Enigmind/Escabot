@@ -79,8 +79,8 @@ export default {
         });
       }, 9000);
 
-      const gptResponse = await openai.createChatCompletion({
-        model: 'gpt-4',
+      const gptResponse = await openai.chat.completions.create({
+        model: 'gpt-4-vision-preview',
         messages: await getContext(),
         max_tokens: 512,
         temperature: 0.9,
@@ -91,12 +91,13 @@ export default {
       });
 
       // Fetch the message content from the GPT response
-      const GPTResponse = gptResponse.data.choices[0].message.content;
+      const GPTResponse = gptResponse.choices[0].message.content;
 
       // Remove any leading "Ah," or "Oh," interjections from the message, and also trim whitespaces at the start and end of the string
       const messageWithInterjection = GPTResponse.replace(/^(Ah,|Oh,)/, '').trim();
 
       // Capitalize the first character of the message and concatenate it with the rest of the message
+
       const finalMessage =
         messageWithInterjection.charAt(0).toUpperCase() +
         messageWithInterjection.slice(1);
