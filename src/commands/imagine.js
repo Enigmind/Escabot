@@ -24,7 +24,7 @@ export default {
         size: '1024x1024',
       });
 
-      const imageURL = openaiResponse.data.data[0].url;
+      const imageURL = openaiResponse.data[0].url;
       const image = await fetch(imageURL)
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => Buffer.from(arrayBuffer));
