@@ -12,8 +12,8 @@ export default {
     if (author === client.user) return;
 
     const channel = client.channels.cache.get(message.channel.id);
-    const tag_de_ses_morts = client.emojis.resolveIdentifier('831548507990261850');
-    const escaDoitIlRepondre = randomResponse();
+    const tagEmoji = client.emojis.resolveIdentifier('831548507990261850');
+    const shouldRespond = randomResponse();
 
     if (member.roles.cache.has('1098324055389646868')) {
       message.delete();
@@ -57,11 +57,11 @@ export default {
     }
 
     if (content.includes('@everyone')) {
-      message.react(tag_de_ses_morts);
+      await message.react(tagEmoji);
     } else if (content.includes('@here')) {
-      message.react('🐒');
-    } else if (message.mentions.has(client.user.id) || escaDoitIlRepondre) {
-      // Définir l'intervalle de frappe
+      await message.react('🐒');
+    } else if (message.mentions.has(client.user.id) || shouldRespond) {
+      // Define the typing interval
       let typingInterval;
 
       const sendTyping = async () => {
@@ -93,18 +93,18 @@ export default {
       // Fetch the message content from the GPT response
       const GPTResponse = gptResponse.data.choices[0].message.content;
 
-      // Remove any leading "Ah," or "Oh," interjections from the message, and also trim white spaces at the start and end of the string
-      const message_without_interjection = GPTResponse.replace(/^(Ah,|Oh,)/, '').trim();
+      // Remove any leading "Ah," or "Oh," interjections from the message, and also trim whitespaces at the start and end of the string
+      const messageWithInterjection = GPTResponse.replace(/^(Ah,|Oh,)/, '').trim();
 
       // Capitalize the first character of the message and concatenate it with the rest of the message
-      const final_message =
-        message_without_interjection.charAt(0).toUpperCase() +
-        message_without_interjection.slice(1);
+      const finalMessage =
+        messageWithInterjection.charAt(0).toUpperCase() +
+        messageWithInterjection.slice(1);
 
       // Send the final message as a reply
-      message.reply(final_message);
+      message.reply(finalMessage);
 
-      // Arrêter l'intervalle de frappe après l'envoi du message
+      // Stop the interval after sending the message
       clearInterval(typingInterval);
     }
   },

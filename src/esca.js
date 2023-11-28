@@ -27,7 +27,7 @@ for (const command of Object.values(commands)) {
   client.commands.set(command.data.name, command);
 }
 
-// Run command (would be better to be in /event but I'm a lazy boï)
+// Run command (would be better to be in /event, but I'm a lazy boï)
 client.on('interactionCreate', async (interaction) => {
   if (!interaction.isCommand()) return;
 

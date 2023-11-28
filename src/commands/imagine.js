@@ -14,18 +14,18 @@ export default {
 
   async execute(interaction) {
     await interaction.deferReply();
-    const user_prompt = interaction.options.getString('prompt');
+    const userPrompt = interaction.options.getString('prompt');
 
     try {
       const openaiResponse = await openai.createImage({
         model: 'dall-e-3',
-        prompt: user_prompt,
+        prompt: userPrompt,
         n: 1,
         size: '1024x1024',
       });
 
-      const image_url = openaiResponse.data.data[0].url;
-      const image = await fetch(image_url)
+      const imageURL = openaiResponse.data.data[0].url;
+      const image = await fetch(imageURL)
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => Buffer.from(arrayBuffer));
 
@@ -34,9 +34,9 @@ export default {
       });
     } catch (error) {
       console.error(error);
-      const status_code = error.response.status;
+      const statusCode = error.response.status;
       await interaction.editReply({
-        content: 'https://http.cat/' + status_code,
+        content: 'https://http.cat/' + statusCode,
       });
     }
   },
