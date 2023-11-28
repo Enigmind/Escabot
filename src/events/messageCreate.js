@@ -41,7 +41,26 @@ export default {
           if (message.author === client.user) {
             context.push({ role: 'assistant', content: message.content });
           } else {
-            context.push({ role: 'user', content: message.content });
+            if (message.attachments.size > 0) {
+              const attachment = message.attachments.first();
+              context.push({
+                role: 'user',
+                content: [
+                  { type: 'text', text: message.content },
+                  {
+                    type: 'image_url',
+                    image_url: {
+                      url: attachment.url,
+                    },
+                  },
+                ],
+              });
+            } else {
+              context.push({
+                role: 'user',
+                content: [{ type: 'text', text: message.content }],
+              });
+            }
           }
         });
       });
@@ -99,8 +118,7 @@ export default {
       // Capitalize the first character of the message and concatenate it with the rest of the message
 
       const finalMessage =
-        messageWithInterjection.charAt(0).toUpperCase() +
-        messageWithInterjection.slice(1);
+        messageWithInterjection.charAt(0).toUpperCase() + messageWithInterjection.slice(1);
 
       // Send the final message as a reply
       message.reply(finalMessage);
