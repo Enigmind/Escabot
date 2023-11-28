@@ -98,33 +98,43 @@ export default {
         });
       }, 9000);
 
-      const gptResponse = await openai.chat.completions.create({
-        model: 'gpt-4-vision-preview',
-        messages: await getContext(),
-        max_tokens: 512,
-        temperature: 0.9,
-        presence_penalty: 0.5,
-        frequency_penalty: 1,
-        n: 1,
-        stream: false,
+      try {
+        const gptResponse = await openai.chat.completions.create({
+          model: 'gpt-4-vision-preview',
+          messages: await getContext(),
+          max_tokens: 512,
+          temperature: 0.9,
+          presence_penalty: 0.5,
+          frequency_penalty: 1,
+          n: 1,
+          stream: false,
+        });
+
+        // Fetch the message content from the GPT response
+        const GPTResponse = gptResponse.choices[0].message.content;
+
+        // Remove any leading "Ah," or "Oh," interjections from the message, and also trim whitespaces at the start and end of the string
+        const messageWithInterjection = GPTResponse.replace(/^(Ah,|Oh,)/, '').trim();
+
+        // Capitalize the first character of the message and concatenate it with the rest of the message
+
+        const finalMessage =
+          messageWithInterjection.charAt(0).toUpperCase() + messageWithInterjection.slice(1);
+
+        // Send the final message as a reply
+        message.reply(finalMessage);
+
+        // Stop the interval after sending the message
+        clearInterval(typingInterval);
+     }
+     catch (error){
+      console.error(error);
+      const statusCode = error.status;
+      message.reply({
+        content: 'https://http.cat/' + statusCode,
       });
-
-      // Fetch the message content from the GPT response
-      const GPTResponse = gptResponse.choices[0].message.content;
-
-      // Remove any leading "Ah," or "Oh," interjections from the message, and also trim whitespaces at the start and end of the string
-      const messageWithInterjection = GPTResponse.replace(/^(Ah,|Oh,)/, '').trim();
-
-      // Capitalize the first character of the message and concatenate it with the rest of the message
-
-      const finalMessage =
-        messageWithInterjection.charAt(0).toUpperCase() + messageWithInterjection.slice(1);
-
-      // Send the final message as a reply
-      message.reply(finalMessage);
-
-      // Stop the interval after sending the message
       clearInterval(typingInterval);
+     }
     }
   },
 };
