@@ -34,7 +34,7 @@ export default {
       });
     } catch (error) {
       console.error(error);
-      const statusCode = error.response.status;
+      const statusCode = error.status;
       await interaction.editReply({
         content: 'https://http.cat/' + statusCode,
       });
