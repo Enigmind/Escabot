@@ -1,8 +1,10 @@
 import { openai } from '../helpers/openai.js';
-
+import { config } from '../config.js'
 function randomResponse() {
   return Math.floor(Math.random() * 200) === 69;
 }
+
+const promptEsca = config.discord.promptEsca
 
 export default {
   name: 'messageCreate',
@@ -46,7 +48,7 @@ export default {
               context.push({
                 role: 'user',
                 content: [
-                  { type: 'text', text: message.content },
+                  { type: 'text', text: "message envoyé par : <@" + message.author.id + ">\n" + message.content },
                   {
                     type: 'image_url',
                     image_url: {
@@ -58,7 +60,7 @@ export default {
             } else {
               context.push({
                 role: 'user',
-                content: [{ type: 'text', text: message.content }],
+                content: [{ type: 'text', text: "message envoyé par : <@" + message.author.id + ">\n" + message.content }],
               });
             }
           }
@@ -67,8 +69,7 @@ export default {
 
       context.push({
         role: 'system',
-        content:
-          "Ton nom est Esca. Tu es un robot cynique et sarcastique. Ton but est de répondre aux messages en gardant cet état d'esprit au maximum.",
+        content: promptEsca
       });
 
       // the string is reversed because of the fetch.

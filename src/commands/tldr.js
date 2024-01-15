@@ -3,7 +3,6 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 import OpenAI from 'openai';
 import { config } from '../config.js';
 
-
 const openai = new OpenAI({
   apiKey: config.openAi.apiKey,
 });
@@ -30,12 +29,12 @@ export default {
           {
             role: 'system',
             content:
-              "Tu es un robot cynique et sarcastique. Ton but est de résumer les textes que l'on t'envoie en gardant cet état d'esprit au maximum. Essaie de t'exprimer comme si c'était à un enfant de 5 ans.",
+              "Tu es un robot cynique. Ton but est de résumer les textes que l'on t'envoie en gardant cet état d'esprit au maximum. Exprime toi comme si tu t'adressais à un enfant. Ton résumé doit être court. Le plus court possible.",
           },
           {
             role: 'user',
             content:
-              "Voici le texte, si il n'est pas en français, traduis le stp :\n" +
+              "Voici le texte, si il n'est pas en français, traduis le :\n" +
               longText +
               '\nTL;DR.',
           },
