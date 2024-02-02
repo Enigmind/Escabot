@@ -1,9 +1,9 @@
-FROM node:19.9.0-alpine3.18
+FROM node:21.5.0-alpine3.18
 
 WORKDIR /usr/src/bot
 
 COPY package*.json /usr/src/bot/
-RUN npm ci --omit dev
+RUN yarn install --immutable
 
 COPY . /usr/src/bot/
 

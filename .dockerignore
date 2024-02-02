@@ -4,3 +4,4 @@ ssh-prod.sh
 .idea
 .gitignore
 npm-debug.log
+.yarn

@@ -5,10 +5,11 @@
   "description": "useless piece of shit",
   "main": "src/esca.js",
   "engines": {
-    "node": "19.9.0"
+    "node": "21.5.0"
   },
   "scripts": {
-    "format": "prettier -w src"
+    "format": "prettier -w src",
+    "esca": "node src/esca.js"
   },
   "repository": {
     "type": "git",
@@ -34,5 +35,6 @@
   },
   "devDependencies": {
     "prettier": "^3.1.0"
-  }
+  },
+  "packageManager": "yarn@4.1.0"
 }
