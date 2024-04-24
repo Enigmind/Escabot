@@ -10,6 +10,14 @@ export default {
     )
     .addStringOption((option) =>
       option.setName('prompt').setDescription('Que veux-tu générer ?').setRequired(true),
+    )
+    .addStringOption(option =>
+      option.setName('format')
+        .setDescription('Quel format pour ton image ?')
+        .addChoice('Carré (1:1)', '1024x1024')
+        .addChoice('Écran (16:9)', '1792x1024')
+        .addChoice('Téléphone (9:16)', '1024x1792')
+        .setRequired(true)
     ),
 
   async execute(interaction) {
@@ -21,7 +29,7 @@ export default {
         model: 'dall-e-3',
         prompt: userPrompt,
         n: 1,
-        size: '1024x1024',
+        size: interaction.options.getString('format'),
       });
 
       const imageURL = openaiResponse.data[0].url;
