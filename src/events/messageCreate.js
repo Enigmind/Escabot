@@ -101,7 +101,7 @@ export default {
 
       try {
         const gptResponse = await openai.chat.completions.create({
-          model: 'gpt-4-vision-preview',
+          model: 'gpt-4o',
           messages: await getContext(),
           max_tokens: 512,
           temperature: 0.9,
