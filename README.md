@@ -9,14 +9,14 @@ Useless sarcastic bot. But it can be fun sometimes...
 
 ## Setup dev environment :
 - clone the git repository : `git clone git@github.com:Enigmind/Escabot.git`
-- install dependencies : `npm install`
+- install dependencies : `yarn install`
 - rename the file `example.env` to `.env`
 - enter the clientId in the `.env` (get it [here](https://discord.com/developpers))
 - enter your bot guild ID in the `.env` (copy it from the discord client with dev options activated)
 - enter your bot token in the `.env` (get it [here](https://discord.com/developpers))
 - enter your openAI key in the `.env` (get it [here](https://beta.openai.com/account/api-keys))
-- deploy the commands into your server : `node src/deployCommands.js`
-- launch bot in terminal : `node src/esca.js`
+- deploy the commands into your server : `yarn deploy-cmds`
+- launch bot in terminal : `yarn esca`
 - write the help command in a discord channel : `/help`
 
 
