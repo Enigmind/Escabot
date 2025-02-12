@@ -1,4 +1,4 @@
-FROM node:21.5.0-alpine3.18
+FROM node:23.7.0-alpine3.20
 
 WORKDIR /usr/src/bot
 

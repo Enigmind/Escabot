@@ -61,6 +61,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mistralai/mistralai@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "@mistralai/mistralai@npm:1.5.0"
+  dependencies:
+    zod-to-json-schema: "npm:^3.24.1"
+  peerDependencies:
+    zod: ">= 3"
+  checksum: 10c0/8feba24876309795000cc89fc80cc6fa05c6db8043ab9c4aded5f34ec346055f24a9c05ab3fed1c0625f7763d6b58dae18f8002168e3f024e2275de9933f3b91
+  languageName: node
+  linkType: hard
+
 "@sapphire/async-queue@npm:^1.1.4, @sapphire/async-queue@npm:^1.5.0":
   version: 1.5.2
   resolution: "@sapphire/async-queue@npm:1.5.2"
@@ -287,6 +298,7 @@ __metadata:
   dependencies:
     "@discordjs/builders": "npm:^0.9.0"
     "@discordjs/rest": "npm:^0.1.0-canary.0"
+    "@mistralai/mistralai": "npm:^1.5.0"
     dateformat: "npm:^3.0.3"
     discord-api-types: "npm:^0.37.37"
     discord-welcome: "npm:^3.0.3"
@@ -296,6 +308,7 @@ __metadata:
     node-fetch: "npm:^2.6.1"
     openai: "npm:^4.20.1"
     prettier: "npm:^3.1.0"
+    zod: "npm:^3.24.2"
   languageName: unknown
   linkType: soft
 
@@ -521,9 +534,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"zod-to-json-schema@npm:^3.24.1":
+  version: 3.24.1
+  resolution: "zod-to-json-schema@npm:3.24.1"
+  peerDependencies:
+    zod: ^3.24.1
+  checksum: 10c0/dd4e72085003e41a3f532bd00061f27041418a4eb176aa6ce33042db08d141bd37707017ee9117d97738ae3f22fc3e1404ea44e6354634ac5da79d7d3173b4ee
+  languageName: node
+  linkType: hard
+
 "zod@npm:^3.11.6":
   version: 3.22.4
   resolution: "zod@npm:3.22.4"
   checksum: 10c0/7578ab283dac0eee66a0ad0fc4a7f28c43e6745aadb3a529f59a4b851aa10872b3890398b3160f257f4b6817b4ce643debdda4fb21a2c040adda7862cab0a587
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.24.2":
+  version: 3.24.2
+  resolution: "zod@npm:3.24.2"
+  checksum: 10c0/c638c7220150847f13ad90635b3e7d0321b36cce36f3fc6050ed960689594c949c326dfe2c6fa87c14b126ee5d370ccdebd6efb304f41ef5557a4aaca2824565
   languageName: node
   linkType: hard
