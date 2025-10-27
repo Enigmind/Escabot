@@ -1,10 +1,10 @@
-import { openai } from '../helpers/openai.js';
-import { config } from '../config.js'
+import { mistral } from '../helpers/mistral.js';
+import { config } from '../config.js';
 function randomResponse() {
   return Math.floor(Math.random() * 200) === 69;
 }
 
-const promptEsca = config.discord.promptEsca
+const promptEsca = config.discord.promptEsca;
 
 export default {
   name: 'messageCreate',
@@ -48,19 +48,20 @@ export default {
               context.push({
                 role: 'user',
                 content: [
-                  { type: 'text', text: "message envoyé par : <@" + message.author.id + ">\n" + message.content },
+                  {
+                    type: 'text',
+                    text: 'message envoyé par : <@' + message.author.id + '>\n' + message.content,
+                  },
                   {
                     type: 'image_url',
-                    image_url: {
-                      url: attachment.url,
-                    },
+                    image_url: attachment.url,
                   },
                 ],
               });
             } else {
               context.push({
                 role: 'user',
-                content: [{ type: 'text', text: "message envoyé par : <@" + message.author.id + ">\n" + message.content }],
+                content: 'message envoyé par : <@' + message.author.id + '>\n' + message.content,
               });
             }
           }
@@ -69,7 +70,7 @@ export default {
 
       context.push({
         role: 'system',
-        content: promptEsca
+        content: promptEsca,
       });
 
       // the string is reversed because of the fetch.
@@ -100,18 +101,14 @@ export default {
       }, 9000);
 
       try {
-        const gptResponse = await openai.chat.completions.create({
-          model: 'gpt-4o',
+        const gptResponse = await mistral.chat.complete({
+          model: 'mistral-large-latest',
           messages: await getContext(),
-          max_tokens: 512,
+          maxTokens: 512,
           temperature: 0.9,
-          presence_penalty: 0.5,
-          frequency_penalty: 1,
-          n: 1,
-          stream: false,
         });
 
-        // Fetch the message content from the GPT response
+        // Fetch the message content from the Mistral response
         const GPTResponse = gptResponse.choices[0].message.content;
 
         // Remove any leading "Ah," or "Oh," interjections from the message, and also trim whitespaces at the start and end of the string
@@ -127,15 +124,14 @@ export default {
 
         // Stop the interval after sending the message
         clearInterval(typingInterval);
-     }
-     catch (error){
-      console.error(error);
-      const statusCode = error.status;
-      message.reply({
-        content: 'https://http.cat/' + statusCode,
-      });
-      clearInterval(typingInterval);
-     }
+      } catch (error) {
+        console.error(error);
+        const statusCode = error.status;
+        message.reply({
+          content: 'https://http.cat/' + statusCode,
+        });
+        clearInterval(typingInterval);
+      }
     }
   },
 };
