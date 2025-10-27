@@ -1,10 +1,10 @@
-FROM node:23.7.0-alpine3.20
+FROM node:25-alpine3.21
 
 WORKDIR /usr/src/bot
 
 COPY . /usr/src/bot/
 
-RUN corepack enable && corepack prepare yarn@stable --activate
+RUN npm install -g corepack --force && corepack enable && corepack prepare yarn@stable --activate
 RUN yarn --immutable
 
 
