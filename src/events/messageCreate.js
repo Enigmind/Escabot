@@ -17,7 +17,7 @@ export default {
     const tagEmoji = client.emojis.resolveIdentifier('831548507990261850');
     const shouldRespond = randomResponse();
 
-    if (member.roles.cache.has('1098324055389646868')) {
+    if (member && member.roles.cache.has('1098324055389646868')) {
       message.delete();
     }
 
@@ -54,7 +54,7 @@ export default {
                   },
                   {
                     type: 'image_url',
-                    image_url: attachment.url,
+                    imageUrl: attachment.url,
                   },
                 ],
               });
@@ -102,7 +102,7 @@ export default {
 
       try {
         const gptResponse = await mistral.chat.complete({
-          model: 'mistral-large-latest',
+          model: 'pixtral-large-latest',
           messages: await getContext(),
           maxTokens: 512,
           temperature: 0.9,
@@ -125,8 +125,13 @@ export default {
         // Stop the interval after sending the message
         clearInterval(typingInterval);
       } catch (error) {
-        console.error(error);
-        const statusCode = error.status;
+        // Safely log error without causing inspect issues
+        console.error('Error in Mistral API call:', {
+          message: error?.message,
+          status: error?.status,
+          statusText: error?.statusText,
+        });
+        const statusCode = error?.status || 500;
         message.reply({
           content: 'https://http.cat/' + statusCode,
         });
