@@ -45,19 +45,39 @@ export default {
           } else {
             if (message.attachments.size > 0) {
               const attachment = message.attachments.first();
-              context.push({
-                role: 'user',
-                content: [
-                  {
-                    type: 'text',
-                    text: 'message envoyé par : <@' + message.author.id + '>\n' + message.content,
-                  },
-                  {
-                    type: 'image_url',
-                    imageUrl: attachment.url,
-                  },
-                ],
-              });
+              // Check if the attachment is a GIF (Mistral doesn't support animated GIFs)
+              // Check both the URL path and the contentType
+              const isGif =
+                attachment.url.toLowerCase().includes('.gif') ||
+                attachment.contentType?.startsWith('image/gif');
+
+              if (isGif) {
+                // For animated GIFs, just include the text without the image
+                context.push({
+                  role: 'user',
+                  content:
+                    'message envoyé par : <@' +
+                    message.author.id +
+                    '>\n' +
+                    message.content +
+                    ' [GIF animé]',
+                });
+              } else {
+                // For static images, include both text and image
+                context.push({
+                  role: 'user',
+                  content: [
+                    {
+                      type: 'text',
+                      text: 'message envoyé par : <@' + message.author.id + '>\n' + message.content,
+                    },
+                    {
+                      type: 'image_url',
+                      imageUrl: attachment.url,
+                    },
+                  ],
+                });
+              }
             } else {
               context.push({
                 role: 'user',
