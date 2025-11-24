@@ -38,7 +38,7 @@ export default {
     async function getContext() {
       let context = [];
 
-      await channel.messages.fetch({ limit: 42 }).then((messages) => {
+      await channel.messages.fetch({ limit: 11 }).then((messages) => {
         messages.forEach((message) => {
           if (message.author === client.user) {
             context.push({ role: 'assistant', content: message.content });
