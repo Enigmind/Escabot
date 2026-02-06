@@ -1,50 +1,87 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { openai } from '../helpers/openai.js';
+import { genAI } from '../helpers/gemini.js';
 
-// use openAI api to generate an image according to the prompt
+// use Google Gemini API to generate images (Imagen 4) or videos (Veo 2)
 export default {
   data: new SlashCommandBuilder()
     .setName('imagine')
     .setDescription(
-      "Je te pond une image en fonction de ce que tu me demandes. C'est pas beau ça ?",
+      "Je te pond une image ou vidéo en fonction de ce que tu me demandes. C'est pas beau ça ?",
     )
     .addStringOption((option) =>
       option.setName('prompt').setDescription('Que veux-tu générer ?').setRequired(true),
     )
     .addStringOption(option =>
-      option.setName('format')
-        .setDescription('Quel format pour ton image ?')
-        .addChoice('Carré (1:1)', '1024x1024')
-        .addChoice('Écran (16:9)', '1792x1024')
-        .addChoice('Téléphone (9:16)', '1024x1792')
+      option.setName('type')
+        .setDescription('Image ou vidéo ?')
+        .addChoice('Image', 'image')
+        .addChoice('Vidéo', 'video')
         .setRequired(true)
     ),
 
   async execute(interaction) {
     await interaction.deferReply();
     const userPrompt = interaction.options.getString('prompt');
+    const type = interaction.options.getString('type');
 
     try {
-      const openaiResponse = await openai.images.generate({
-        model: 'dall-e-3',
-        prompt: userPrompt,
-        n: 1,
-        size: interaction.options.getString('format'),
-      });
+      if (type === 'image') {
+        // Générer une image avec Imagen 4
+        const model = genAI.getGenerativeModel({
+          model: 'veo-3.1-generate-preview'
+        });
 
-      const imageURL = openaiResponse.data[0].url;
-      const image = await fetch(imageURL)
-        .then((response) => response.arrayBuffer())
-        .then((arrayBuffer) => Buffer.from(arrayBuffer));
+        const result = await model.generateContent(userPrompt);
 
-      await interaction.editReply({
-        files: [image],
-      });
+        const response = result.response;
+        const imagePart = response.candidates[0].content.parts.find(part => part.inlineData);
+
+        if (!imagePart) {
+          throw new Error('Aucune image générée');
+        }
+
+        const imageBuffer = Buffer.from(imagePart.inlineData.data, 'base64');
+
+        await interaction.editReply({
+          files: [{
+            attachment: imageBuffer,
+            name: 'generated_image.png'
+          }],
+        });
+      } else {
+        // Générer une vidéo avec Veo 2
+        const model = genAI.getGenerativeModel({ model: 'veo-2.0-generate-001' });
+
+        const result = await model.generateContent({
+          contents: [{
+            role: 'user',
+            parts: [{ text: userPrompt }]
+          }],
+          generationConfig: {
+            responseModalities: 'video',
+          }
+        });
+
+        const response = result.response;
+        const videoPart = response.candidates[0].content.parts.find(part => part.inlineData);
+
+        if (!videoPart) {
+          throw new Error('Aucune vidéo générée');
+        }
+
+        const videoBuffer = Buffer.from(videoPart.inlineData.data, 'base64');
+
+        await interaction.editReply({
+          files: [{
+            attachment: videoBuffer,
+            name: 'generated_video.mp4'
+          }],
+        });
+      }
     } catch (error) {
       console.error(error);
-      const statusCode = error.status;
       await interaction.editReply({
-        content: 'https://http.cat/' + statusCode,
+        content: `Oups, Gemini pue. Fuck google hein ?`,
       });
     }
   },
