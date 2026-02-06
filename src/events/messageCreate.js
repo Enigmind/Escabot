@@ -50,7 +50,7 @@ export default {
 
     async function getContext() {
       let context = [];
-      const messages = await channel.messages.fetch({ limit: 11 });
+      const messages = await channel.messages.fetch({ limit: 33 });
 
       for (const message of messages.values()) {
         if (message.author === client.user) {
