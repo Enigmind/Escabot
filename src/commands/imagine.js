@@ -16,8 +16,7 @@ export default {
       option
         .setName('type')
         .setDescription('Image ou vidéo ?')
-        .addChoice('Image', 'image')
-        .addChoice('Vidéo', 'video')
+        .addChoices({ name: 'Image', value: 'image' }, { name: 'Vidéo', value: 'video' })
         .setRequired(true),
     ),
 

@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
 import fetch from 'node-fetch';
 
@@ -29,7 +29,7 @@ export default {
     const definition = trim(answer.definition, 1024).replaceAll('[', '').replaceAll(']', '');
     const example = trim(answer.example, 1024).replaceAll('[', '').replaceAll(']', '');
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setColor('#EFFF00')
       .setTitle(answer.word)
       .setURL(answer.permalink)

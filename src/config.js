@@ -4,9 +4,6 @@ import { config as dotenv } from 'dotenv';
 dotenv();
 
 export const config = {
-  openAi: {
-    apiKey: env.get('OPEN_AI_KEY').required().asString(),
-  },
   mistral: {
     apiKey: env.get('MISTRAL_KEY').required().asString(),
   },

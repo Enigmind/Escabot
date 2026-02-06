@@ -1,11 +1,11 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
 export default {
   data: new SlashCommandBuilder().setName('help').setDescription('Display help message'),
   async execute(interaction) {
-    const cmdList = new MessageEmbed()
+    const cmdList = new EmbedBuilder()
       //header
       .setColor('#800000')
       .setTitle('Liste des commandes')
@@ -22,7 +22,6 @@ export default {
           name: 'imagine',
           value: "Génère une image. Demande moi n'importe quoi et laisse toi suprendre !",
         },
-        { name: 'tldr', value: 'Résume un texte long. Parfait pour la feignasse que tu es !' },
         {
           name: 'urban_dic',
           value:
