@@ -1,7 +1,20 @@
-import { mistral } from '../helpers/mistral.js';
+import { genAI } from '../helpers/gemini.js';
 import { config } from '../config.js';
+
 function randomResponse() {
   return Math.floor(Math.random() * 200) === 69;
+}
+
+async function fetchImageAsBase64(url) {
+  try {
+    const response = await fetch(url);
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    return buffer.toString('base64');
+  } catch (error) {
+    console.error('Error fetching image:', error);
+    return null;
+  }
 }
 
 const promptEsca = config.discord.promptEsca;
@@ -37,61 +50,43 @@ export default {
 
     async function getContext() {
       let context = [];
+      const messages = await channel.messages.fetch({ limit: 11 });
 
-      await channel.messages.fetch({ limit: 11 }).then((messages) => {
-        messages.forEach((message) => {
-          if (message.author === client.user) {
-            context.push({ role: 'assistant', content: message.content });
-          } else {
-            if (message.attachments.size > 0) {
-              const attachment = message.attachments.first();
-              // Check if the attachment is a GIF (Mistral doesn't support animated GIFs)
-              // Check both the URL path and the contentType
-              const isGif =
-                attachment.url.toLowerCase().includes('.gif') ||
-                attachment.contentType?.startsWith('image/gif');
+      for (const message of messages.values()) {
+        if (message.author === client.user) {
+          context.push({ role: 'model', parts: [{ text: message.content }] });
+        } else {
+          const parts = [
+            { text: 'message envoyé par : <@' + message.author.id + '>\n' + message.content },
+          ];
 
-              if (isGif) {
-                // For animated GIFs, just include the text without the image
-                context.push({
-                  role: 'user',
-                  content:
-                    'message envoyé par : <@' +
-                    message.author.id +
-                    '>\n' +
-                    message.content +
-                    ' [GIF animé]',
-                });
-              } else {
-                // For static images, include both text and image
-                context.push({
-                  role: 'user',
-                  content: [
-                    {
-                      type: 'text',
-                      text: 'message envoyé par : <@' + message.author.id + '>\n' + message.content,
-                    },
-                    {
-                      type: 'image_url',
-                      imageUrl: attachment.url,
-                    },
-                  ],
+          if (message.attachments.size > 0) {
+            const attachment = message.attachments.first();
+            // Check if the attachment is an image (including GIFs)
+            const isImage =
+              attachment.contentType?.startsWith('image/') ||
+              /\.(jpg|jpeg|png|gif|webp)$/i.test(attachment.url);
+
+            if (isImage) {
+              // Fetch and convert the image to base64 for Gemini
+              const base64Data = await fetchImageAsBase64(attachment.url);
+              if (base64Data) {
+                parts.push({
+                  inlineData: {
+                    mimeType: attachment.contentType || 'image/jpeg',
+                    data: base64Data,
+                  },
                 });
               }
-            } else {
-              context.push({
-                role: 'user',
-                content: 'message envoyé par : <@' + message.author.id + '>\n' + message.content,
-              });
             }
           }
-        });
-      });
 
-      context.push({
-        role: 'system',
-        content: promptEsca,
-      });
+          context.push({
+            role: 'user',
+            parts: parts,
+          });
+        }
+      }
 
       // the string is reversed because of the fetch.
       return context.reverse();
@@ -121,18 +116,24 @@ export default {
       }, 9000);
 
       try {
-        const gptResponse = await mistral.chat.complete({
-          model: 'pixtral-large-latest',
-          messages: await getContext(),
-          maxTokens: 512,
-          temperature: 0.9,
+        const model = genAI.getGenerativeModel({
+          model: 'gemini-2.5-flash',
+          systemInstruction: promptEsca,
+          generationConfig: {
+            maxOutputTokens: 5096,
+            temperature: 0.9,
+          },
         });
 
-        // Fetch the message content from the Mistral response
-        const GPTResponse = gptResponse.choices[0].message.content;
+        const chat = model.startChat({
+          history: await getContext(),
+        });
 
-        // Remove any leading "Ah," or "Oh," interjections from the message, and also trim whitespaces at the start and end of the string
-        const messageWithInterjection = GPTResponse.replace(/^(Ah,|Oh,)/, '').trim();
+        const result = await chat.sendMessage('');
+
+        // Fetch the message content from the Gemini response
+        const GPTResponse = result.response.text();
+
 
         // Capitalize the first character of the message and concatenate it with the rest of the message
 
@@ -146,7 +147,7 @@ export default {
         clearInterval(typingInterval);
       } catch (error) {
         // Safely log error without causing inspect issues
-        console.error('Error in Mistral API call:', {
+        console.error('Error in Gemini API call:', {
           message: error?.message,
           status: error?.status,
           statusText: error?.statusText,
