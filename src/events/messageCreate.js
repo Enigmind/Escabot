@@ -134,11 +134,8 @@ export default {
         // Fetch the message content from the Gemini response
         const GPTResponse = result.response.text();
 
-
-        // Capitalize the first character of the message and concatenate it with the rest of the message
-
-        const finalMessage =
-          messageWithInterjection.charAt(0).toUpperCase() + messageWithInterjection.slice(1);
+        // Capitalize the first character of the message
+        const finalMessage = GPTResponse.charAt(0).toUpperCase() + GPTResponse.slice(1);
 
         // Send the final message as a reply
         message.reply(finalMessage);
