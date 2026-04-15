@@ -50,7 +50,7 @@ export default {
 
     async function getContext() {
       let context = [];
-      const messages = await channel.messages.fetch({ limit: 33 });
+      const messages = await channel.messages.fetch({ limit: 20 });
 
       for (const message of messages.values()) {
         if (message.author === client.user) {
@@ -120,7 +120,7 @@ export default {
           model: 'gemini-2.5-flash',
           systemInstruction: promptEsca,
           generationConfig: {
-            maxOutputTokens: 5096,
+            maxOutputTokens: 2000,
             temperature: 0.9,
           },
         });
