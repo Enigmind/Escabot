@@ -89,7 +89,14 @@ export default {
       }
 
       // the string is reversed because of the fetch.
-      return context.reverse();
+      context.reverse();
+
+      // Gemini exige que l'historique commence par un message 'user'
+      while (context.length > 0 && context[0].role !== 'user') {
+        context.shift();
+      }
+
+      return context;
     }
 
     if (content.includes('@everyone')) {
