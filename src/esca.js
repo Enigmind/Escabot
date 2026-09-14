@@ -45,10 +45,18 @@ client.on('interactionCreate', async (interaction) => {
     await command.execute(interaction);
   } catch (error) {
     console.error(error);
-    await interaction.reply({
-      content: 'There was an error while executing this command!',
-      ephemeral: true,
-    });
+    try {
+      const errorReply = { content: 'There was an error while executing this command!', ephemeral: true };
+      if (interaction.deferred || interaction.replied) {
+        await interaction.editReply(errorReply);
+      } else {
+        await interaction.reply(errorReply);
+      }
+    } catch (fallbackError) {
+      // L'interaction peut déjà être acquittée ou expirée côté Discord (ex: erreur 10062/40060
+      // transitoire) : on log sans laisser cette erreur planter le process.
+      console.error('Impossible de notifier l’utilisateur de l’erreur :', fallbackError);
+    }
   }
 });
 
